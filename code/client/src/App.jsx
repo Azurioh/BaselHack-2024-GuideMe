@@ -1,15 +1,18 @@
-import { useState } from 'react'
-import { Table } from 'antd'
 import './global.css'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import { Routes, Route } from 'react-router-dom'
+import Signup from './pages/Signup'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
-    <>
-      <div className='h-full w-full space-y-3'>
-        <h1 className='text-center text-9xl font-bold'>GuideMe.</h1>
-        <h1 className='text-center text-3xl'>create a guide for... anything</h1>
-      </div>
-    </>
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/signup' element={<Signup/>} />
+      <Route path='/*' element={<NotFound/>} />
+    </Routes>
   )
 }
 
