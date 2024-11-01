@@ -18,7 +18,7 @@ model User {
   email    String @unique
   password String
 
-  Guidelines Guideline[]
+  guidelines Guideline[]
 
   @@map("users")
 }
