@@ -1,3 +1,5 @@
 node_modules
 .env
 prisma/client
+.postgres
+.DS_Store
