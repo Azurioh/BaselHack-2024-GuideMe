@@ -2,8 +2,11 @@ services:
   database:
     image: postgres:latest
     container_name: baselhack-2024-database
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=baselhack
     restart: always
     ports:
       - '$POSTGRES_PORT:$POSTGRES_PORT'
@@ -27,9 +30,13 @@ services:
       database:
         condition: service_healthy
     container_name: baselhack-2024-server
-    env_file:
-      - .env
     environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=baselhack
+      - DATABASE_HOSTNAME=database
+      - DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@database:$POSTGRES_PORT/$POSTGRES_DB?sslMode=require"
       - MIGRATE=${MIGRATE:-true}
       - LOCAL=${MIGRATE:-true}
     ports:
