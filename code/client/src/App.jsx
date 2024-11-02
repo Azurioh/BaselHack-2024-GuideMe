@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
-import AuthorizedRoute from './components/AuthorizedRoute'
+import AuthorizedRoute from './Component/AuthorizedRoute'
 
 function App() {
   return (
