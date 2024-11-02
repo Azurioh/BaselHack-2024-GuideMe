@@ -17,7 +17,12 @@ model User {
   email     String @unique
   password  String
 
-  guidelines Guideline[] // Relation avec Guideline
+  email    String @unique
+  password String
+
+  guidelines Guideline[] @relation("CreatedGuidelines")
+  likes     Guideline[] @relation("LikedGuidelines")
+  saved     Guideline[] @relation("SavedGuidelines")
 
   @@map("users")
 }
@@ -27,13 +32,15 @@ model Guideline {
 
   title    String
   imgs     String[]
-  keywords String?
+  keywords String[]
   result   String
 
-  ratings Int[]
+  likes Int
 
-  creatorId Int? // Clé étrangère
-  creator   User? @relation(fields: [creatorId], references: [id]) // Relation avec User
+  creator    User?  @relation("CreatedGuidelines", fields: [creatorId], references: [id])
+  creatorId  Int?
+  likedBy    User[] @relation("LikedGuidelines")
+  savedBy    User[] @relation("SavedGuidelines")
 
   @@map("guideLines")
 }
