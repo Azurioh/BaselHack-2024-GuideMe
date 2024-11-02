@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
 import MyTable from '../Component/table.jsx'
+<<<<<<< HEAD
+=======
+import ModalNewGuide from '../Component/modalNewGuide.jsx'
+>>>>>>> 41aa224230e9219fee7eb337d88d1b8e900a6599
 
 const data = [
   { title:'Guide 1',author:'Ben Dover',rating:5,tags:['tag1','tag2','tag3'],liked:true,key:'1' },
@@ -16,18 +20,20 @@ const data = [
 ];
 
 function Home() {
+  const [newGuideModalOpen, setNewGuideModalOpen] = useState(false);
   return (
     <>
-      <div className='h-full w-full lg:space-y-3 content-center pt-10'>
+      <div className='h-full w-full lg:space-y-3 pt-10'>
         <h1 className='text-center text-5xl lg:text-9xl font-bold'>GuideMe.</h1>
         <h1 className='text-center text-l lg:text-3xl'>create a guide for... anything</h1>
         <div className='pt-10 lg:pt-40 h-full w-full flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3 items-center justify-center'>
           <MyTable
             data={data}
-            addGuideButtonCallBack={() => console.log('add guide button clicked')}
+            addGuideButtonCallBack={() => setNewGuideModalOpen(true)}
             />
         </div>
       </div>
+      <ModalNewGuide isOpen={newGuideModalOpen} onClose={() => setNewGuideModalOpen(false)} />
     </>
   )
 }

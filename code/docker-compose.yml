@@ -1,29 +1,27 @@
 services:
   database:
-    image: postgres:latest
+    image: postgres:15
     container_name: baselhack-2024-database
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=baselhack
     restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=baselhack
     ports:
-      - '$POSTGRES_PORT:$POSTGRES_PORT'
+      - "5432:5432"
     expose:
-      - $POSTGRES_PORT
+      - 5432
     networks:
       - local
     volumes:
       - ./.postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD-SHELL", "pg_isready -d baselhack -U postgres"]
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 5
 
   server:
-    build: 
+    build:
       context: ./server
       dockerfile: ./Dockerfile
     depends_on:
@@ -31,39 +29,36 @@ services:
         condition: service_healthy
     container_name: baselhack-2024-server
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=baselhack
+      - PORT=4242
       - DATABASE_HOSTNAME=database
-      - DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@database:$POSTGRES_PORT/$POSTGRES_DB?sslMode=require"
       - MIGRATE=${MIGRATE:-true}
-      - LOCAL=${MIGRATE:-true}
+      - PROD=${PROD:-false}
     ports:
-      - '$PORT:$PORT'
+      - 4242:4242
     expose:
-      - $PORT
+      - 4242
     volumes:
       - ./server/src:/build_/src
     networks:
       - local
-  
+    command: >
+      sh -c "scripts/start-server.sh"
+
   client:
-    build: 
+    build:
       context: ./client
       dockerfile: ./Dockerfile
     container_name: baselhack-2024-client
     depends_on:
       - server
-    env_file:
-      - .env
+    environment:
+      - PROD=${PROD:-false}
     ports:
       - 8080:8080
     expose:
       - 8080
     networks:
       - local
-
 
 networks:
   local:
