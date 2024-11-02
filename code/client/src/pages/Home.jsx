@@ -1,9 +1,5 @@
-import './global.css'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import { Routes, Route } from 'react-router-dom'
-import Signup from './pages/Signup'
-import NotFound from './pages/NotFound'
+import { useState, useEffect } from 'react'
+import MyTable from './Component/table.jsx'
 
 const data = [
   { title:'Guide 1',author:'Ben Dover',rating:5,tags:['tag1','tag2','tag3'],liked:true,key:'1' },

@@ -9,7 +9,7 @@ import AuthorizedRoute from './components/AuthorizedRoute'
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<AuthorizedRoute><Home/></AuthorizedRoute>} />
       <Route path='/login' element={<Login/>} />
       <Route path='/signup' element={<Signup/>} />
       <Route path='/*' element={<NotFound/>} />
