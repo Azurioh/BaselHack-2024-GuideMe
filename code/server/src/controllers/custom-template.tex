@@ -6,15 +6,19 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{longtable}
+\usepackage{fancyhdr}
 
 \geometry{top=2cm, bottom=2cm, left=3cm, right=2cm}
 \definecolor{customblue}{RGB}{173, 216, 230}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L] {
+\begin{tikzpicture}[remember picture, overlay]
+    \fill[customblue] (current page.north west) rectangle ([xshift=1cm]current page.south west);
+\end{tikzpicture}
+}
 
 \begin{document}
-
-\begin{tikzpicture}[remember picture,overlay]
-  \fill[customblue] (current page.north west) rectangle ([xshift=1cm]current page.south west);
-\end{tikzpicture}
 
 \begin{center}
     {\LARGE \textbf{\textsf{${title}}}}
