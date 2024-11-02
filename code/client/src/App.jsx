@@ -11,9 +11,16 @@ import AppHeader from './Component/AppHeader'
 import Profile from './pages/Profile'
 import Logout from './pages/Logout'
 
+import i18n from './lang/i18n';
+import { useEffect } from 'react'
+
 function App() {
   const location = useLocation();
   const displayHeader = location.pathname === "/application" || location.pathname === "/profile";
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   return (
     <Layout style={{

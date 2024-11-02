@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Table, Typography, Card } from 'antd';
 import CardTableProfile from '../Component/cardTableProfile';
+import LanguageSelector from '../Component/LanguageSelector';
 
 const { Title } = Typography;
 
@@ -44,6 +45,7 @@ const Profile = () => {
           <Form.Item label="Email">
             <Input value={profile.email} readOnly />
           </Form.Item>
+          <LanguageSelector/>
         </Form>
       </Card>
 
