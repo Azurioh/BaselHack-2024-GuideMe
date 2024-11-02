@@ -2,7 +2,7 @@ import './global.css'
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Signup from './pages/Signup'
+import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import AuthorizedRoute from './Component/AuthorizedRoute'
 import { Layout } from 'antd'
@@ -24,7 +24,7 @@ function App() {
         <Route path='/application' element={<AuthorizedRoute><Home/></AuthorizedRoute>} />
         <Route path='/profile' element={<AuthorizedRoute><Profile/></AuthorizedRoute>} />
         <Route path='/login' element={<Login/>} />
-        <Route path='/signup' element={<Signup/>} />
+        <Route path='/register' element={<Register/>} />
         <Route path='/logout' element={<Logout/>} />
         <Route path='/*' element={<NotFound/>} />
       </Routes>

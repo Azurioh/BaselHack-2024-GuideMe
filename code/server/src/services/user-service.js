@@ -11,6 +11,10 @@ export class UserService {
     return await this.userRepository.getUserById(id, includeGuide);
   }
 
+  async getUserByEmail(email, includeGuide) {
+    return await this.userRepository.getUserByEmail(email, includeGuide);
+  }
+
   async createUser(userData) {
     return await this.userRepository.createUser(userData);
   }
