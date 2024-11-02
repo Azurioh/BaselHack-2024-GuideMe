@@ -75,16 +75,16 @@ export class GuidelineController {
     }
   };
 
-  generatePdfFromMarkdown = async (req, res) => {
+  generateFileFromMarkdown = async (req, res) => {
     try {
-      const { markdownContent, title } = req.body;
+      const { markdownContent, title, format } = req.body;
 
       if (!markdownContent) {
         return res.status(400).json({ err: 'Contenu Markdown requis.' });
       }
 
       const markdownFilePath = path.join(__dirname, 'temp.md');
-      const pdfFilePath = path.join(__dirname, 'output.pdf');
+      const outputFilePath = path.join(__dirname, `output.${format}`);
       const templatePath = path.join(__dirname, 'custom-template.tex');
 
       const content = `---
@@ -95,27 +95,32 @@ ${markdownContent}`;
 
       fs.writeFileSync(markdownFilePath, content);
 
-      const command = `pandoc ${markdownFilePath} --pdf-engine=xelatex --template=${templatePath} --resource-path=${__dirname} -o ${pdfFilePath}`;
+      let command;
+      if (format === 'pdf') {
+        command = `pandoc ${markdownFilePath} --pdf-engine=xelatex --template=${templatePath} --resource-path=${__dirname} -o ${outputFilePath}`;
+      } else if (format === 'docx') {
+        command = `pandoc ${markdownFilePath} -o ${outputFilePath}`;
+      } else {
+        return res.status(400).json({ err: 'Format unknow. Use "pdf" or "docx".' });
+      }
 
       exec(command, (error) => {
         if (error) {
-          console.error('Erreur lors de la conversion :', error);
-          return res.status(500).json({ err: 'Erreur de conversion en PDF.' });
+          return res.status(500).json({ err: 'Error in convert file.' });
         }
 
-        res.download(pdfFilePath, 'output.pdf', (err) => {
+        res.download(outputFilePath, `output.${format}`, (err) => {
           if (err) {
-            console.error("Erreur lors de l'envoi du PDF :", err);
-            return res.status(500).json({ err: 'Erreur lors du téléchargement du PDF.' });
+            return res.status(500).json({ err: 'Error while downloading file.' });
           }
 
           fs.unlinkSync(markdownFilePath);
-          fs.unlinkSync(pdfFilePath);
+          fs.unlinkSync(outputFilePath);
         });
       });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ err: 'Erreur serveur.' });
+      res.status(500).json({ err: 'Error server.' });
     }
   };
 }

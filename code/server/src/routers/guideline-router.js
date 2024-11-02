@@ -15,6 +15,6 @@ guidelineRouter.post('/', guidelineController.createGuideline);
 guidelineRouter.put('/:id', guidelineController.updateGuideline);
 guidelineRouter.delete('/:id', guidelineController.deleteGuideline);
 
-guidelineRouter.post('/markdownToPdf', guidelineController.generatePdfFromMarkdown);
+guidelineRouter.post('/markdownToPdf', guidelineController.generateFileFromMarkdown);
 
 export default guidelineRouter;
