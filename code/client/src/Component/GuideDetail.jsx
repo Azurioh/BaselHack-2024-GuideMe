@@ -1,7 +1,8 @@
-import { HeartFilled, HeartOutlined, SaveFilled, SaveOutlined } from "@ant-design/icons";
+import { HeartFilled, HeartOutlined, LeftOutlined, RightOutlined, SaveFilled, SaveOutlined } from "@ant-design/icons";
 import { Button, Carousel, Modal, Tag, Typography } from "antd";
 import Title from "antd/es/typography/Title";
 import { useState } from "react";
+import MarkdownDisplay from "./MarkdownDisplay";
 
 const { Text, Paragraph } = Typography;
 
@@ -26,6 +27,7 @@ function GuideDetail(props) {
             onCancel={props.onClose}
             footer={null}
             centered
+            style={{ marginTop: '10px' }}
         >
             <div style={{ textAlign: 'center', marginBottom: '10px' }}>
                 <Text strong>Author:</Text> <Text>{props.guide?.author || "Unknown Author"}</Text>
@@ -42,13 +44,13 @@ function GuideDetail(props) {
             {props.guide?.images && props.guide.images.length > 0 && (
                 <div style={{textAlign: 'center', alignItems: 'center'}}>
                     <Title level={4}>Images</Title>
-                    <Carousel arrows autoplay>
+                    <Carousel autoplay infinite>
                         {props.guide.images.map((image, index) => (
-                            <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '500px', }}>
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '300px', }}>
                                 <img
                                     src={image}
                                     alt={`Image ${index + 1}`}
-                                    style={{ width: '100%', maxHeight: '500px', objectFit: 'contain' }}
+                                    style={{ width: '100%', maxHeight: '300px', objectFit: 'contain' }}
                                 />
                             </div>
                         ))}
@@ -77,9 +79,7 @@ function GuideDetail(props) {
 
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
                 <Title level={4}>Description</Title>
-                <Paragraph>
-                    {props.guide?.description || "No description available."}
-                </Paragraph>
+                <MarkdownDisplay text={props.guide?.description}/>
             </div>
         </Modal>
     )
