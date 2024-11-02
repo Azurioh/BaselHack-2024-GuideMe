@@ -23,8 +23,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ssh_key ${SERVER_USER}@${SERVER_IP} '
             cd BaselHack-2024-GuideMe/code &&
             git pull origin main &&
-            cd server &&
-            npx prisma generate &&
+            # cd server &&
+            # npx prisma generate &&
             docker compose down -v &&
             PROD=true MIGRATE=false docker compose up -d --build
           '
