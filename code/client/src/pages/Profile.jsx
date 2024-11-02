@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Table, Typography, Card } from 'antd';
+import LanguageSelector from '../Component/LanguageSelector';  // Assure-toi d'importer le composant correctement
 
 const { Title } = Typography;
 
@@ -51,6 +52,7 @@ const Profile = () => {
           <Form.Item label="Email">
             <Input value={profile.email} readOnly />
           </Form.Item>
+          <LanguageSelector/>
         </Form>
       </Card>
 

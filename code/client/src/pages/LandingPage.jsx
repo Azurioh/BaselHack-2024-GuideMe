@@ -1,9 +1,8 @@
+// LandingPage.jsx
 import React from 'react';
-import { Button, Select } from 'antd';
-import { GlobalOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
-const { Option } = Select;
+import LanguageSelector from '../Component/LanguageSelector';  // Assure-toi d'importer le composant correctement
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -28,12 +27,12 @@ function LandingPage() {
         color: '#172554',
       }}
     >
-        <h1 style={{ fontSize: '3rem', color: '#1e40af', fontWeight: 'bold' }}>Welcome to GuideMe by Endress+Hauser</h1>
-        <p style={{ fontSize: '1.3rem', color: '#555', maxWidth: '800px', lineHeight: '1.6', textAlign: 'center' }}>
-            At Endress+Hauser, we build advanced measurement devices for the process automation industry.
-            With countless devices come countless assembly guides. Why not generate these guides
-            automatically, based on a sequence of images? GuideMe does just that – saving time and resources.
-        </p>
+      <h1 style={{ fontSize: '3rem', color: '#1e40af', fontWeight: 'bold' }}>Welcome to GuideMe by Endress+Hauser</h1>
+      <p style={{ fontSize: '1.3rem', color: '#555', maxWidth: '800px', lineHeight: '1.6', textAlign: 'center' }}>
+        At Endress+Hauser, we build advanced measurement devices for the process automation industry.
+        With countless devices come countless assembly guides. Why not generate these guides
+        automatically, based on a sequence of images? GuideMe does just that – saving time and resources.
+      </p>
 
       <div
         style={{
@@ -71,19 +70,7 @@ function LandingPage() {
         </Button>
       </div>
 
-      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-        <Select
-          defaultValue="en"
-          onChange={handleLanguageChange}
-          style={{ width: 250 }}
-          suffixIcon={<GlobalOutlined />}
-          size='large'
-        >
-          <Option value="en">🇬🇧 English</Option>
-          <Option value="fr">🇫🇷 Français</Option>
-          <Option value="de">🇩🇪 Deutsch</Option>
-        </Select>
-      </div>
+      <LanguageSelector/>
     </div>
   );
 }
