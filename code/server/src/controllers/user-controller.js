@@ -5,8 +5,11 @@ export class UserController {
 
   getAllUsers = async (req, res) => {
     try {
-      const users = await this.userService.getAllUsers();
-      res.status(200).json({ data: { users } });
+      const includeGuide = req.query.includeGuide === 'true';
+
+      const users = await this.userService.getAllUsers(includeGuide);
+
+      res.status(200).json({ data: users });
     } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Internal server error.' });
@@ -15,10 +18,26 @@ export class UserController {
 
   getUserById = async (req, res) => {
     try {
-      const id = parseInt(req.params.id);
+      const { id } = req.body;
       const includeGuide = req.query.includeGuide === 'true';
+
       const user = await this.userService.getUserById(id, includeGuide);
-      res.status(200).json({ data: { user } });
+
+      res.status(200).json({ data: user });
+    } catch (err) {
+      console.error(err);
+      res.status(400).json({ err: 'User not found.' });
+    }
+  };
+
+  getUserByEmail = async (req, res) => {
+    try {
+      const { email } = req.body;
+      const includeGuide = req.query.includeGuide === 'true';
+
+      const user = await this.userService.getUserByEmail(email, includeGuide);
+
+      res.status(200).json({ data: user });
     } catch (err) {
       console.error(err);
       res.status(400).json({ err: 'User not found.' });
@@ -28,79 +47,10 @@ export class UserController {
   createUser = async (req, res) => {
     try {
       const userData = req.body;
+
       const user = await this.userService.createUser(userData);
-      res.status(201).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
 
-  updateUser = async (req, res) => {
-    try {
-      const id = parseInt(req.params.id);
-      const userData = req.body;
-      const user = await this.userService.updateUser(id, userData);
-      res.status(200).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
-
-  deleteUser = async (req, res) => {
-    try {
-      const id = parseInt(req.params.id);
-      await this.userService.deleteUser(id);
-      res.status(204).end();
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
-
-  likeGuideline = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId);
-      const guidelineId = parseInt(req.params.guidelineId);
-      const user = await this.userService.likeGuideline(userId, guidelineId);
-      res.status(200).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
-
-  unlikeGuideline = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId);
-      const guidelineId = parseInt(req.params.guidelineId);
-      await this.userService.unlikeGuideline(userId, guidelineId);
-      res.status(204).end();
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
-
-  saveGuideline = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId);
-      const guidelineId = parseInt(req.params.guidelineId);
-      const user = await this.userService.saveGuideline(userId, guidelineId);
-      res.status(200).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
-
-  unsaveGuideline = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId);
-      const guidelineId = parseInt(req.params.guidelineId);
-      await this.userService.unsaveGuideline(userId, guidelineId);
-      res.status(204).end();
+      res.status(201).json({ data: user });
     } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Internal server error.' });
