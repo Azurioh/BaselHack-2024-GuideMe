@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 export class UserController {
   constructor(userService) {
     this.userService = userService;
@@ -53,6 +55,8 @@ export class UserController {
   createUser = async (req, res) => {
     try {
       const userData = req.body;
+
+      userData.password = await bcrypt.hash(userData.password, 10);
       
       const user = await this.userService.createUser(userData);
 
