@@ -1,15 +1,14 @@
 services:
   database:
-    image: postgres:latest
+    image: postgres:15
     container_name: baselhack-2024-database
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=baselhack
     restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=baselhack
     ports:
-      - 5432:5432
+      - '5432:5432'
     expose:
       - 5432
     networks:
@@ -17,9 +16,9 @@ services:
     volumes:
       - ./.postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 5s
+      test: ["CMD-SHELL", "pg_isready", "-d", "$${{POSTGRES_DB}}", "-U", "$${{POSTGRES_USER}}"]
+      interval: 30s
+      timeout: 10s
       retries: 5
 
   server:
@@ -32,7 +31,7 @@ services:
     container_name: baselhack-2024-server
     environment:
       - PORT=4242
-      - DATABASE_URL=postgresql://postgres:postgres@database:5432/baselhack
+      - DATABASE_URL=postgresql://root:root@database:5432/baselhack?schema=public
       - MIGRATE=${MIGRATE:-true}
       - LOCAL=${MIGRATE:-true}
     ports:
