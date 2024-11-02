@@ -1,5 +1,3 @@
-import { bycrypt } from 'bcryptjs';
-
 export class UserService {
   constructor(userRepository) {
     this.userRepository = userRepository;
@@ -13,6 +11,10 @@ export class UserService {
     return await this.userRepository.getUserById(id, includeGuide);
   }
 
+  async getUserByEmail(email, includeGuide) {
+    return await this.userRepository.getUserByEmail(email, includeGuide);
+  }
+
   async createUser(userData) {
     return await this.userRepository.createUser(userData);
   }
@@ -24,16 +26,6 @@ export class UserService {
   async deleteUser(id) {
     return await this.userRepository.deleteUser(id);
   }
-
-  async authicateUser(email, password) {
-    const user = await this.userRepository.getUserByEmail(email, false);
-    try {
-      bycrypt.compare(password, user.password);
-    } catch (err) {
-      return null;
-    }
-    return user;
-  };
 
   async likeGuideline(userId, guidelineId) {
     return await this.userRepository.likeGuideline(userId, guidelineId);

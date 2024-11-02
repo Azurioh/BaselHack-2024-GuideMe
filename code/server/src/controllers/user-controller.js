@@ -1,15 +1,7 @@
-const bcrypt = require('bcrypt');
-
 export class UserController {
   constructor(userService) {
     this.userService = userService;
   }
-
-    
-  createToken = (firstname , lastname) =>  {
-    const token = jwt.sign({firstname, lastname}, process.env.JWT_SECRET, { expiresIn: '2h' });
-    return token;
-  };
 
   getAllUsers = async (req, res) => {
     try {
@@ -33,20 +25,20 @@ export class UserController {
     }
   };
 
-  createUser = async (req, res) => {
-    try {
-      const userData = req.body;
+  // createUser = async (req, res) => {
+  //   try {
+  //     const userData = req.body;
 
-      userData.password = await bcrypt.hash(userData.password, 10);
-      
-      const user = await this.userService.createUser(userData);
-      res.status(201).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-    res.status(201).json({ data: user, token: this.createToken(user.firstname, user.lastname) });
-  };
+  //     userData.password = await bcrypt.hash(userData.password, 10);
+
+  //     const user = await this.userService.createUser(userData);
+  //     res.status(201).json({ data: { user } });
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.status(500).json({ err: 'Internal server error.' });
+  //   }
+  //   res.status(201).json({ data: user, token: this.createToken(user.firstname, user.lastname) });
+  // };
 
   updateUser = async (req, res) => {
     try {
@@ -117,15 +109,5 @@ export class UserController {
       console.error(err);
       res.status(500).json({ err: 'Internal server error.' });
     }
-  };
-
-  authenticateUser = async (req, res) => {
-      const { email, password } = req.body;
-      
-      const user = await this.userService.authenticateUser(email, password);
-      if (!user) {
-        return res.status(401).json({ err: 'Invalid credentials.' });
-      }
-      res.status(200).json({ data: user, token: this.createToken(user.firstname, user.lastname) });  
   };
 }
