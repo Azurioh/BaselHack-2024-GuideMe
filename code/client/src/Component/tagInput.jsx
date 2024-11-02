@@ -7,7 +7,7 @@ const TagInput = ({ onTagsChange }) => {
 
   const addTag = (value) => {
     if (value && !tags.includes(value)) {
-      const newTags = [...tags, value];
+      const newTags = [...tags, value.toUpperCase()];
       setTags(newTags);
       onTagsChange(newTags);
     }

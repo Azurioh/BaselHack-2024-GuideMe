@@ -76,14 +76,16 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
         />
         <Column
           title={() => (
-            <div className="flex justify-end items-end">
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                size="large"
-                onClick={addGuideButtonCallBack}
-              />
-            </div>
+            addGuideButtonCallBack ? (
+              <div className="flex justify-end items-end">
+                <Button
+                  type="primary"
+                  icon={<PlusOutlined />}
+                  size="large"
+                  onClick={addGuideButtonCallBack}
+                />
+              </div>
+            ) : null
           )}
           key="actions"
           render={(text, record) => (

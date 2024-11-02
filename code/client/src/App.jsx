@@ -11,12 +11,26 @@ import AppHeader from './Component/AppHeader'
 import Profile from './pages/Profile'
 import Logout from './pages/Logout'
 
+import i18n from './lang/i18n';
+import { useEffect } from 'react'
+
 function App() {
   const location = useLocation();
   const displayHeader = location.pathname === "/application" || location.pathname === "/profile";
 
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
-    <Layout>
+    <Layout style={{
+      minHeight: '100vh',
+      backgroundImage: 'url("/background.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+    }}>
       {displayHeader && <AppHeader />}
 
       <Routes>
