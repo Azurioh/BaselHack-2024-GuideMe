@@ -21,7 +21,7 @@ function Home() {
 
   return (
     <>
-      <div className='h-full w-full lg:space-y-3 pt-10'>
+      <div className='h-full w-full lg:space-y-3 pt-10' style={{color: "#001529"}}>
         <h1 className='text-center text-5xl lg:text-9xl font-bold'>GuideMe.</h1>
         <h1 className='text-center text-l lg:text-3xl'>create a guide for... anything</h1>
         <div className='pt-10 lg:pt-40 h-full w-full flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3 items-center justify-center'>

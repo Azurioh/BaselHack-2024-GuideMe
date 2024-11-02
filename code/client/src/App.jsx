@@ -16,7 +16,14 @@ function App() {
   const displayHeader = location.pathname === "/application" || location.pathname === "/profile";
 
   return (
-    <Layout>
+    <Layout style={{
+      minHeight: '100vh',
+      backgroundImage: 'url("/background.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+    }}>
       {displayHeader && <AppHeader />}
 
       <Routes>
