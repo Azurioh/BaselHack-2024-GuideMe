@@ -1,0 +1,14 @@
+path: .
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 13
+names: ['Chest Press machine', 'Lat Pull Down', 'Seated Cable Rows', 'arm curl machine', 'chest fly machine', 'chinning dipping', 'lateral raises machine', 'leg extension', 'leg press', 'reg curl machine', 'seated dip machine', 'shoulder press machine', 'smith machine']
+
+roboflow:
+  workspace: bangkit-academy-ognnb
+  project: gym-equipment-object-detection
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/bangkit-academy-ognnb/gym-equipment-object-detection/dataset/1
