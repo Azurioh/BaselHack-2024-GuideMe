@@ -2,6 +2,8 @@ import express from 'express';
 import { UserRepository } from '../repositories/user-repository.js';
 import { UserService } from '../services/user-service.js';
 import { UserController } from '../controllers/user-controller.js';
+import requestValidator from '../middlewares/request-validator.js';
+import { createUserSchema } from '../entities/user/user.js';
 
 const userRouter = express.Router();
 
@@ -12,7 +14,7 @@ const userController = new UserController(userService);
 userRouter.get('/', userController.getAllUsers);
 userRouter.get('/:id', userController.getUserById);
 userRouter.get('/:email', userController.getUserByEmail);
-userRouter.post('/', userController.createUser);
+userRouter.post('/', requestValidator(createUserSchema), userController.createUser);
 // router.put('/:id');
 // router.delete('/:id');
 
