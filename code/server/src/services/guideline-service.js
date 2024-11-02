@@ -11,10 +11,6 @@ export class GuidelineService {
     return await this.guidelineRepository.getGuidelineById(id);
   }
 
-  async getGuidelineByEmail(email) {
-    return await this.guidelineRepository.getGuidelineByEmail(email);
-  }
-
   async createGuideline(guidelineData) {
     return await this.guidelineRepository.createGuideline(guidelineData);
   }
