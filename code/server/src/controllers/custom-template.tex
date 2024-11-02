@@ -5,10 +5,7 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 
-% Configuration des marges
 \geometry{top=2cm, bottom=2cm, left=3cm, right=2cm}
-
-% Couleur de la ligne
 \definecolor{customblue}{RGB}{173, 216, 230}
 
 \begin{document}
@@ -18,20 +15,19 @@
   \fill[customblue] (current page.north west) rectangle ([xshift=1cm]current page.south west);
 \end{tikzpicture}
 
-% Titre principal
+% Affiche le titre de façon dynamique
 \begin{center}
-    {\LARGE \textbf{\textsf{\title}}} % Use Pandoc's title variable
+    {\LARGE \textbf{\textsf{${title}}}}
 \end{center}
 
-\par\vspace{2cm} % Espacement avant le contenu
+\par\vspace{2cm}
 
-% This is where the body content will be injected
-{{BODY}}
+% Pandoc insérera le contenu Markdown ici
 
 % Logo en bas du document
 \vfill
 \begin{center}
-    \includegraphics[width=5cm]{/build_/src/controllers/logo.png} % Absolute path for testing
+    \includegraphics[width=5cm]{/build_/src/controllers/logo.png}
 \end{center}
 
 \end{document}

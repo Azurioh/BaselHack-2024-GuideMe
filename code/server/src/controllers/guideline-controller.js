@@ -88,10 +88,10 @@ export class GuidelineController {
       const templatePath = path.join(__dirname, 'custom-template.tex');
 
       const content = `---
-  title: "${title}"
-  ---
+title: "${title}"
+---
 
-  ${markdownContent}`;
+${markdownContent}`;
 
       fs.writeFileSync(markdownFilePath, content);
 
