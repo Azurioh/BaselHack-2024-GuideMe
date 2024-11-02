@@ -1,5 +1,5 @@
-# gym equipment object detection > 2023-05-25 10:08am
-https://universe.roboflow.com/bangkit-academy-ognnb/gym-equipment-object-detection
+# All Gym Equipment > 2024-04-10 6:36pm
+https://universe.roboflow.com/fitfuel/all-gym-equipment
 
 Provided by a Roboflow user
 License: CC BY 4.0
