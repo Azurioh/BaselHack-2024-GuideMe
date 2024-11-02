@@ -13,9 +13,13 @@ const userController = new UserController(userService);
 
 userRouter.get('/', userController.getAllUsers);
 userRouter.get('/:id', userController.getUserById);
-userRouter.get('/:email', userController.getUserByEmail);
-userRouter.post('/', requestValidator(createUserSchema), userController.createUser);
-// router.put('/:id');
-// router.delete('/:id');
+userRouter.post('/', userController.createUser);
+userRouter.put('/:id', userController.updateUser);
+userRouter.delete('/:id', userController.deleteUser);
+
+userRouter.post('/:userId/like/:guidelineId', userController.likeGuideline);
+userRouter.delete('/:userId/like/:guidelineId', userController.unlikeGuideline);
+userRouter.post('/:userId/save/:guidelineId', userController.saveGuideline);
+userRouter.delete('/:userId/save/:guidelineId', userController.unsaveGuideline);
 
 export default userRouter;

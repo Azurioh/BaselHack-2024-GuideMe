@@ -16,7 +16,6 @@ CREATE TABLE "guideLines" (
     "imgs" TEXT[],
     "keywords" TEXT[],
     "result" TEXT NOT NULL,
-    "likes" INTEGER NOT NULL,
     "creatorId" INTEGER,
 
     CONSTRAINT "guideLines_pkey" PRIMARY KEY ("id")
