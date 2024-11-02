@@ -24,6 +24,7 @@ services:
         build:
             context: ./server
             dockerfile: ./Dockerfile
+        restart: always
         depends_on:
             database:
                 condition: service_healthy
@@ -33,6 +34,8 @@ services:
             - DATABASE_HOSTNAME=database
             - MIGRATE=${MIGRATE:-true}
             - PROD=${PROD:-false}
+            - SECRET=secret
+            - JWT_SECRET=jwt_secret
         ports:
             - 4242:4242
         expose:
@@ -41,7 +44,6 @@ services:
             - ./server/src:/build_/src
         networks:
             - local
-        restart: always
         command: >
             sh -c "scripts/start-server.sh"
 

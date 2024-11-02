@@ -25,16 +25,20 @@ export class UserController {
     }
   };
 
-  createUser = async (req, res) => {
-    try {
-      const userData = req.body;
-      const user = await this.userService.createUser(userData);
-      res.status(201).json({ data: { user } });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ err: 'Internal server error.' });
-    }
-  };
+  // createUser = async (req, res) => {
+  //   try {
+  //     const userData = req.body;
+
+  //     userData.password = await bcrypt.hash(userData.password, 10);
+
+  //     const user = await this.userService.createUser(userData);
+  //     res.status(201).json({ data: { user } });
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.status(500).json({ err: 'Internal server error.' });
+  //   }
+  //   res.status(201).json({ data: user, token: this.createToken(user.firstname, user.lastname) });
+  // };
 
   updateUser = async (req, res) => {
     try {
