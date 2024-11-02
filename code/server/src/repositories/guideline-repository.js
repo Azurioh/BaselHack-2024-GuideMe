@@ -2,7 +2,13 @@ import { prisma } from '../global.js';
 
 export class GuidelineRepository {
   async getAllGuidelines() {
-    return await prisma.guideline.findMany({});
+    return await prisma.guideline.findMany({
+      include: {
+        creator: true,
+        likedBy: true,
+        savedBy: true,
+      },
+    });
   }
 
   async getGuidelineById(id) {
@@ -11,8 +17,8 @@ export class GuidelineRepository {
       include: {
         creator: true,
         likedBy: true,
-        savedBy: true
-      }
+        savedBy: true,
+      },
     });
   }
 
