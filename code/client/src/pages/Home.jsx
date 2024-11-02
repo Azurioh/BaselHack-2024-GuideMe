@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import MyTable from '../Component/table.jsx'
-import ModalNewGuide from '../Component/modalNewGuide.jsx'
-import GuideDetail from '../Component/GuideDetail.jsx';
+import ModalNewGuide from '../Component/modalNewGuide.jsx';
 
 const data = [
   { title:'Guide 1',author:'Ben Dover',likes:5,tags:['tag1','tag2','tag3'],liked:true,key:'1', images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150', 'https://via.placeholder.com/150'], description: "This is a simple description on multiple line, soicdnsodinc sdocin zapeoxpo,xaz azpxqdc ervocrev cdsdpoc,z eaporve rv sdicsdocinscd zeoincc qsdcoiqncd qdscoinqsdc qsodicnqsd cqsodicnez czoencze cozincsdcoisndc qcoinsdocinsd csd c cze ze c zec z cs dcqsdicqdocinqsoicdnqosdc ze cze zecuz ecoaizecoianezfoiaf afez ac sdcqsdc eozincaezoicnz ceaz eca zec aze cazecqscsddd" },
@@ -19,6 +18,7 @@ const data = [
 
 function Home() {
   const [newGuideModalOpen, setNewGuideModalOpen] = useState(false);
+
   return (
     <>
       <div className='h-full w-full lg:space-y-3 pt-10'>
