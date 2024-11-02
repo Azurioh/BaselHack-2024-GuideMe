@@ -44,7 +44,7 @@ export class AuthController {
       return res.status(201).json({ data: { token } });
     } catch (err) {
       console.error(err);
-      throw new Error("Can't create the user now.");
+      return res.status(500).json({ err: "Can't create account" });
     }
   };
 }
