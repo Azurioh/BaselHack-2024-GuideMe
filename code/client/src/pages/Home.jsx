@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import MyTable from './Component/table.jsx'
+import MyTable from '../Component/table.jsx'
 
 const data = [
   { title:'Guide 1',author:'Ben Dover',rating:5,tags:['tag1','tag2','tag3'],liked:true,key:'1' },
