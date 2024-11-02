@@ -14,11 +14,10 @@ model User {
 
   firstName String
   lastName  String
+  email     String @unique
+  password  String
 
-  email    String @unique
-  password String
-
-  guidelines Guideline[]
+  guidelines Guideline[] // Relation avec Guideline
 
   @@map("users")
 }
@@ -33,7 +32,8 @@ model Guideline {
 
   ratings Int[]
 
-  creator User? @relation(fields: [id], references: [id])
+  creatorId Int? // Clé étrangère
+  creator   User? @relation(fields: [creatorId], references: [id]) // Relation avec User
 
   @@map("guideLines")
 }

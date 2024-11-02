@@ -9,10 +9,6 @@ export class UserRepository {
     return await prisma.user.findUniqueOrThrow({ where: { id }, include: { guidelines: includeGuide } });
   }
 
-  async getUserByEmail(email, includeGuide) {
-    return await prisma.user.findUniqueOrThrow({ where: { email }, include: { guidelines: includeGuide } });
-  }
-
   async createUser(userData) {
     return await prisma.user.create({ data: userData });
   }

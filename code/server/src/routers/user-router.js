@@ -11,9 +11,8 @@ const userController = new UserController(userService);
 
 userRouter.get('/', userController.getAllUsers);
 userRouter.get('/:id', userController.getUserById);
-userRouter.get('/:email', userController.getUserByEmail);
 userRouter.post('/', userController.createUser);
-// router.put('/:id');
-// router.delete('/:id');
+userRouter.put('/:id', userController.updateUser);
+userRouter.delete('/:id', userController.deleteUser);
 
 export default userRouter;

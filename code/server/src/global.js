@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '../prisma/client/index.js';
 import userRouter from './routers/user-router.js';
+import guidelineRouter from './routers/guideline-router.js';
 
 dotenv.config();
 
@@ -16,3 +17,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/users', userRouter);
+app.use('/guidelines', guidelineRouter);
