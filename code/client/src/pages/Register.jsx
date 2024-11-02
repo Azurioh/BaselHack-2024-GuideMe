@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 import { Button, Flex, Form, Input, Progress } from "antd";
@@ -20,8 +20,8 @@ function Register() {
     async function handleRegister() {
         try {
             await axios.post('/api/auth/register', {
-                firstname: firstName,
-                lastname: lastName,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password
             });

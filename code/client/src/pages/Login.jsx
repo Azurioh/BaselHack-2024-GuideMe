@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input } from 'antd';
 import { useAuth } from '../auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Title from 'antd/es/typography/Title';
 
