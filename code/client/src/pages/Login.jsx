@@ -16,7 +16,7 @@ function Login() {
         login();
         console.log("email: ", email);
         console.log("password: ", password);
-        navigate('/');
+        navigate('/application');
     }
 
     return (
