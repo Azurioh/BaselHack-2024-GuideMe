@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Space, Tag, Button } from 'antd';
-import { PlusOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { PlusOutlined, HeartOutlined, HeartFilled, StarOutlined,
+    StarFilled, } from '@ant-design/icons';
 
 const { Column } = Table;
 
@@ -34,6 +35,23 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
         key="rating"
         onFilter={(value, record) => record.rating === value}
         sorter={(a, b) => a.rating - b.rating}
+        render={(rating) => {
+            if (rating > 5) {
+                return "Invalid rating";
+            }
+            const maxRating = 5;
+            const yellowStars = Array(rating).fill("*").map((_, index) =>
+              <StarFilled style={{ color: "#ffbf00" }} />);
+            const blackStars = Array(maxRating - rating).fill("*").map((_, index) => <StarOutlined style={{ color: "#ffbf00" }} />);
+
+            return (
+              <span>
+                  {yellowStars}
+                  {blackStars}
+              </span>
+            );
+          }
+        }
         defaultSortOrder={'descend'}
       />
       <Column
