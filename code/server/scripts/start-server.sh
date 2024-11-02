@@ -5,7 +5,7 @@ if [ "$LOCAL" = "false" ]; then
 fi
 
 if [ "$MIGRATE" = "true" ]; then
-    npx prisma migrate dev --schema=./prisma/schema.prisma
+    npx prisma migrate dev --name "initial_migration" --schema=./prisma/schema.prisma
 fi
 
 npm start
