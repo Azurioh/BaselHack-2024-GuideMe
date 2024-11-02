@@ -28,12 +28,13 @@ model Guideline {
 
   title    String
   imgs     String[]
-  keywords String?
+  keywords String[]
   result   String
 
-  ratings Int[]
+  likes Int
 
-  creator User? @relation(fields: [id], references: [id])
+  creator User? @relation(fields: [creatorId], references: [id])
+  creatorId Int?
 
   @@map("guideLines")
 }
