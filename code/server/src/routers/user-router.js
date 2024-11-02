@@ -13,7 +13,6 @@ const userController = new UserController(userService);
 
 userRouter.get('/', userController.getAllUsers);
 userRouter.get('/:id', userController.getUserById);
-userRouter.get('/:email', userController.getUserByEmail);
 userRouter.put('/:id', userController.updateUser);
 userRouter.delete('/:id', userController.deleteUser);
 

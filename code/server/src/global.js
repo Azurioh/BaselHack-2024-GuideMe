@@ -3,7 +3,6 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '../prisma/client/index.js';
-import jwtSecurity from './middlewares/jwt-security.js';
 import userRouter from './routers/user-router.js';
 import authRouter from './routers/auth-router.js';
 import guidelineRouter from './routers/guideline-router.js';
@@ -13,16 +12,23 @@ dotenv.config();
 export const app = express();
 export const prisma = new PrismaClient();
 
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://baselhack.azu-dev.fr'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 app.get('/', (_, res) => {
   res.status(200).json({ data: 'API is ready to use!' });
 });
 
-app.use('/users', jwtSecurity ,userRouter);
+app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/guidelines', guidelineRouter);
 
