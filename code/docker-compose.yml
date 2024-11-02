@@ -21,7 +21,7 @@ services:
 
   server:
     build: 
-      context: .
+      context: ./server
       dockerfile: ./Dockerfile
     depends_on:
       database:
@@ -37,7 +37,23 @@ services:
     expose:
       - $PORT
     volumes:
-      - ./src:/build_/src
+      - ./server/src:/build_/src
+    networks:
+      - local
+  
+  client:
+    build: 
+      context: ./client
+      dockerfile: ./Dockerfile
+    container_name: baselhack-2024-client
+    depends_on:
+      - server
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
     networks:
       - local
 
