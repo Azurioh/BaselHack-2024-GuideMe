@@ -4,26 +4,28 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
 
 \geometry{top=2cm, bottom=2cm, left=3cm, right=2cm}
 \definecolor{customblue}{RGB}{173, 216, 230}
 
 \begin{document}
 
-% Ligne colorée sur le côté
 \begin{tikzpicture}[remember picture,overlay]
   \fill[customblue] (current page.north west) rectangle ([xshift=1cm]current page.south west);
 \end{tikzpicture}
 
-% Affiche le titre de façon dynamique
 \begin{center}
     {\LARGE \textbf{\textsf{${title}}}}
 \end{center}
 
-\par\vspace{1cm} % Espacement entre le titre et le contenu
+\par\vspace{1cm}
 
-\noindent
-{{ body }} % Correct placeholder for body
+{\obeylines\obeyspaces
+\texttt{
+${body}
+}}
 
 \vfill
 \begin{center}
