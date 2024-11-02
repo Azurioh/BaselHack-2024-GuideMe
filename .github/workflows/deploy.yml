@@ -11,7 +11,7 @@ jobs:
     environment: DEPLOY
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Connect to VPS with SSH and deploy
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -23,5 +23,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ssh_key ${SERVER_USER}@${SERVER_IP} '
             cd BaselHack-2024-GuideMe/code &&
             git pull origin main &&
-            docker compose up -d --build
+            cd server/scripts &&
+            ./generate-prisma.sh &&
+            docker compose down -v &&
+            PROD=true MIGRATE=false docker compose up -d --build
           '
