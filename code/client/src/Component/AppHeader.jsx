@@ -1,7 +1,6 @@
 import { Layout, Menu } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HomeOutlined, ContainerOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import LanguageSelector from './LanguageSelector';
 
 const { Header } = Layout;
 

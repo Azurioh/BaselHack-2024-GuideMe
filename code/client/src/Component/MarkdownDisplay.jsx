@@ -4,7 +4,7 @@ import { FiCopy } from 'react-icons/fi';
 import { FaFilePdf, FaFileWord } from 'react-icons/fa';
 
 
-const MarkdownDisplay = ({ text }) => {
+const MarkdownDisplay = ({ title, text }) => {
     function handleCopy() {
         navigator.clipboard.writeText(text);
         message.success('Copied to clipboard');
@@ -12,11 +12,23 @@ const MarkdownDisplay = ({ text }) => {
 
     function handleDownloadPDF() {
         // TODO: call the server to get the pdf
+        const data = {
+            title: title,
+            markdownContent: text,
+            format: "pdf"
+        }
+        console.log(data);
         console.log('Download PDF');
     }
 
     function handleDownloadDOCX() {
         // TODO: call the server to get the docx
+        const data = {
+            title: title,
+            markdownContent: text,
+            format: "docx"
+        }
+        console.log(data);
         console.log('Download DOCX');
     }
 

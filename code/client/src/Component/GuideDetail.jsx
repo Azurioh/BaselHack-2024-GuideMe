@@ -79,7 +79,7 @@ function GuideDetail(props) {
 
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
                 <Title level={4}>Description</Title>
-                <MarkdownDisplay text={props.guide?.description}/>
+                <MarkdownDisplay text={props.guide?.description} title={props.guide?.title}/>
             </div>
         </Modal>
     )

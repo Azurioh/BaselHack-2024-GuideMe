@@ -92,7 +92,10 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
             <div className="flex justify-end items-end">
               <Button
                 type="primary"
-                onClick={() => toggleLike(record.key)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLike(record.key);
+                }}
                 icon={record.liked ? <HeartFilled /> : <HeartOutlined />}
               />
             </div>
