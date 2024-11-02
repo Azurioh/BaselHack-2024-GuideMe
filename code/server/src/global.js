@@ -15,4 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+app.get('/', (_, res) => {
+  res.status(200).json({ data: 'API is ready to use!' });
+});
+
 app.use('/users', userRouter);
