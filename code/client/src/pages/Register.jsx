@@ -139,14 +139,6 @@ function Register() {
                     Register
                 </Button>
             </Form>
-		<Button
-                onClick={() => {
-                    axios.get('https://api.baselhack.azu-dev.fr/users')
-                        .then(res => console.log(res))
-                        .catch(err => console.error(err));
-                }}>
-                Test server
-            </Button>
         </Flex>
     )
 }
