@@ -14,9 +14,10 @@ CREATE TABLE "guideLines" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "imgs" TEXT[],
-    "keywords" TEXT,
+    "keywords" TEXT[],
     "result" TEXT NOT NULL,
-    "ratings" INTEGER[],
+    "likes" INTEGER NOT NULL,
+    "creatorId" INTEGER,
 
     CONSTRAINT "guideLines_pkey" PRIMARY KEY ("id")
 );
@@ -25,4 +26,4 @@ CREATE TABLE "guideLines" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
-ALTER TABLE "guideLines" ADD CONSTRAINT "guideLines_id_fkey" FOREIGN KEY ("id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "guideLines" ADD CONSTRAINT "guideLines_creatorId_fkey" FOREIGN KEY ("creatorId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
