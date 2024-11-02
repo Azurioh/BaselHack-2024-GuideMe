@@ -9,9 +9,9 @@ services:
       - POSTGRES_DB=baselhack
     restart: always
     ports:
-      - '$POSTGRES_PORT:$POSTGRES_PORT'
+      - 5432:5432
     expose:
-      - $POSTGRES_PORT
+      - 5432
     networks:
       - local
     volumes:
@@ -31,18 +31,14 @@ services:
         condition: service_healthy
     container_name: baselhack-2024-server
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=baselhack
-      - DATABASE_HOSTNAME=database
-      - DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@database:$POSTGRES_PORT/$POSTGRES_DB?sslMode=require"
+      - PORT=4242
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/baselhack?sslMode=require
       - MIGRATE=${MIGRATE:-true}
       - LOCAL=${MIGRATE:-true}
     ports:
-      - '$PORT:$PORT'
+      - 4242:4242
     expose:
-      - $PORT
+      - 4242
     volumes:
       - ./server/src:/build_/src
     networks:
@@ -55,8 +51,6 @@ services:
     container_name: baselhack-2024-client
     depends_on:
       - server
-    env_file:
-      - .env
     ports:
       - 8080:8080
     expose:
