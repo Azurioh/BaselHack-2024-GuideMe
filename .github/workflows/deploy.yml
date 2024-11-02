@@ -21,7 +21,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ssh_key
           chmod 600 ssh_key
           ssh -o StrictHostKeyChecking=no -i ssh_key ${SERVER_USER}@${SERVER_IP} '
-            cd BaselHack-2024-GuideMe &&
+            cd BaselHack-2024-GuideMe/code &&
             git pull origin main &&
             docker compose up -d --build
           '
