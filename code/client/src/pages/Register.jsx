@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 import { Button, Flex, Form, Input, Progress } from "antd";
+import axios from "axios";
 import Title from "antd/es/typography/Title";
 
-function Signup() {
+function Register() {
     const {login} = useAuth();
     const navigate = useNavigate();
 
@@ -16,10 +17,19 @@ function Signup() {
     const [strength, setStrength] = useState(0);
     const [color, setColor] = useState('gray');
 
-    function handleSignup() {
-        login();
-        // TODO: call the api to signup
-        navigate('/');
+    async function handleRegister() {
+        try {
+            await axios.post('https://api.baselhack.azu-dev.fr/auth/register', {
+                firstname: firstName,
+                lastname: lastName,
+                email: email,
+                password: password
+            });
+            login();
+            navigate('/');
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function handlePasswordChange(e) {
@@ -59,10 +69,10 @@ function Signup() {
 
     return (
         <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg mx-auto m-5" vertical>
-            <Title level={2} className="text-center">Signup</Title>
+            <Title level={2} className="text-center">Register</Title>
             <Form
                 layout='vertical'
-                onFinish={handleSignup}
+                onFinish={handleRegister}
                 initialValues={{ remember: true }}
                 className="text-right"
             >
@@ -90,7 +100,14 @@ function Signup() {
                 <Form.Item
                     label='Password'
                     name='password'
-                    rules={[{ required: true, message: 'Please input your password!'}]}
+                    rules={[{
+                        required: true,
+                      validator: (_, value) => {
+                          if (password == "")
+                            return Promise.reject(new Error("Please input at least one tag!"));
+                          return Promise.resolve();
+                      },
+                    }]}
                 >
                     <Input.Password onChange={handlePasswordChange}/>
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
@@ -113,11 +130,11 @@ function Signup() {
                     htmlType='submit'
                     style={{alignSelf: 'right'}}
                 >
-                    Signup
+                    Register
                 </Button>
             </Form>
         </Flex>
     )
 }
 
-export default Signup;
+export default Register;
