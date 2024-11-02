@@ -9,7 +9,13 @@ export class UserController {
 
       const users = await this.userService.getAllUsers(includeGuide);
 
-      res.status(200).json({ data: users });
+      res.status(200).json({
+        data: users.map((user) => {
+          const { password, ...userData } = user;
+
+          return userData;
+        }),
+      });
     } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Internal server error.' });
@@ -23,7 +29,9 @@ export class UserController {
 
       const user = await this.userService.getUserById(id, includeGuide);
 
-      res.status(200).json({ data: user });
+      const { password, ...userData } = user;
+
+      res.status(200).json({ data: userData });
     } catch (err) {
       console.error(err);
       res.status(400).json({ err: 'User not found.' });
@@ -37,7 +45,9 @@ export class UserController {
 
       const user = await this.userService.getUserByEmail(email, includeGuide);
 
-      res.status(200).json({ data: user });
+      const { password, ...userData } = user;
+
+      res.status(200).json({ data: userData });
     } catch (err) {
       console.error(err);
       res.status(400).json({ err: 'User not found.' });
