@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 17
+names: ['Arm Curl Machine', 'Chest Fly Machine', 'Chest Press Machine', 'Dumbbell', 'Functional Trainer', 'Kettlebells', 'Lat Pull Down Machine', 'Lateral Raises Machine', 'Leg Curl Machine', 'Leg Extension Machine', 'Leg Press Machine', 'Leg Raise Tower', 'Seated Dip Machine', 'Seated Row Machine', 'Shoulder Press Machine', 'Smith Machine', 'Treadmill']
+
+roboflow:
+  workspace: fitfuel
+  project: all-gym-equipment
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/fitfuel/all-gym-equipment/dataset/1
