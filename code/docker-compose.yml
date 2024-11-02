@@ -42,12 +42,7 @@ services:
         networks:
             - local
         command: >
-            sh -c "
-            if [ \"$MIGRATE\" = \"true\" ]; then
-                npx prisma migrate dev --name 'initial_migration' --schema=./prisma/schema.prisma;
-            fi &&
-            npm start
-            "
+            sh -c "scripts/start-server.sh"
 
     client:
         build:
