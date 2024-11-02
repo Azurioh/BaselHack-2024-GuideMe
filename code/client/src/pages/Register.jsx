@@ -20,13 +20,13 @@ function Register() {
     async function handleRegister() {
         try {
             await axios.post('/api/auth/register', {
-                firstname: firstName,
-                lastname: lastName,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password
             });
             login();
-            navigate('/');
+            navigate('/application');
         } catch (error) {
             console.error(error);
         }
@@ -68,78 +68,75 @@ function Register() {
     };
 
     return (
-        <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg mx-auto m-5" vertical>
-            <Title level={2} className="text-center">Register</Title>
-            <Form
-                layout='vertical'
-                onFinish={handleRegister}
-                initialValues={{ remember: true }}
-                className="text-right"
-            >
-                <Form.Item
-                    label='Firstname'
-                    name='firstname'
-                    rules={[{ required: true, message: 'Please input your firstname!' }]}
+        <div className="flex justify-center items-center min-h-screen">
+            <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg" vertical align="center">
+                <Title level={2} className="text-center">Register</Title>
+                <Form
+                    layout='vertical'
+                    onFinish={handleRegister}
+                    initialValues={{ remember: true }}
                 >
-                    <Input onChange={(e) => setFirstName(e.target.value)} />
-                </Form.Item>
-                <Form.Item
-                    label='Lastname'
-                    name='lastname'
-                    rules={[{ required: true, message: 'Please input your lastname!' }]}
-                >
-                    <Input onChange={(e) => setLastName(e.target.value)} />
-                </Form.Item>
-                <Form.Item
-                    label='Email'
-                    name='email'
-                    rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
-                >
-                    <Input onChange={(e) => setEmail(e.target.value)} />
-                </Form.Item>
-                <Form.Item
-                    label='Password'
-                    name='password'
-                    rules={[{
-                        required: true,
-                      validator: (_, value) => {
-                          if (password == "")
-                            return Promise.reject(new Error("Please input at least one tag!"));
-                          return Promise.resolve();
-                      },
-                    }]}
-                >
-                    <Input.Password onChange={handlePasswordChange}/>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
-                        <Progress
-                            percent={(strength / 4) * 100}
-                            showInfo={false}
-                            strokeColor={color}
-                        />
-                        <span style={{ marginLeft: '10px', color }}>
-                            {strength === 0 && 'Weak'}
-                            {strength === 1 && 'Weak'}
-                            {strength === 2 && 'Fair'}
-                            {strength === 3 && 'Good'}
-                            {strength === 4 && 'Strong'}
-                        </span>
-                    </div>
-                </Form.Item>
-                <Form.Item>
-                    <div className="text-center">
-                        <span>Already have an account ? </span>
-                        <Link to={"/login"}>Login</Link>
-                    </div>
-                </Form.Item>
-                <Button
-                    type='primary'
-                    htmlType='submit'
-                    style={{alignSelf: 'right'}}
-                >
-                    Register
-                </Button>
-            </Form>
-        </Flex>
+                    <Form.Item
+                        label='Firstname'
+                        name='firstname'
+                        rules={[{ required: true, message: 'Please input your firstname!' }]}
+                    >
+                        <Input onChange={(e) => setFirstName(e.target.value)} />
+                    </Form.Item>
+                    <Form.Item
+                        label='Lastname'
+                        name='lastname'
+                        rules={[{ required: true, message: 'Please input your lastname!' }]}
+                    >
+                        <Input onChange={(e) => setLastName(e.target.value)} />
+                    </Form.Item>
+                    <Form.Item
+                        label='Email'
+                        name='email'
+                        rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                    >
+                        <Input onChange={(e) => setEmail(e.target.value)} />
+                    </Form.Item>
+                    <Form.Item
+                        label='Password'
+                        name='password'
+                        rules={[{
+                            required: true,
+                            validator: (_, value) => {
+                                if (password == "")
+                                    return Promise.reject(new Error("Please input at least one tag!"));
+                                return Promise.resolve();
+                            },
+                        }]}
+                    >
+                        <Input.Password onChange={handlePasswordChange}/>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                            <Progress
+                                percent={(strength / 4) * 100}
+                                showInfo={false}
+                                strokeColor={color}
+                            />
+                            <span style={{ marginLeft: '10px', color }}>
+                                {strength === 0 && 'Weak'}
+                                {strength === 1 && 'Weak'}
+                                {strength === 2 && 'Fair'}
+                                {strength === 3 && 'Good'}
+                                {strength === 4 && 'Strong'}
+                            </span>
+                        </div>
+                    </Form.Item>
+                    <Form.Item className="flex justify-center">
+                        <Button
+                            type='primary'
+                            htmlType='submit'
+                        >
+                            Register
+                        </Button>
+                    </Form.Item>
+                </Form>
+                <Button className="mb-4" onClick={() => navigate('/login')} type='link'>Already have an account ? Login here</Button>
+            </Flex>
+        </div>
     )
 }
 
