@@ -1,7 +1,7 @@
 #!/bin/sh
 
-sudo docker compose down -v
-rm -rf ../../.postgres
-rm -rf ../prisma/client
+docker compose down -v
+sudo rm -rf ../../.postgres
+sudo rm -rf ../prisma/client
 ./generate-prisma.sh
-sudo docker compose up --build
+docker compose up --build
