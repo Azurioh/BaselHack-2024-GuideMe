@@ -16,7 +16,6 @@ function Login() {
         login();
         console.log("email: ", email);
         console.log("password: ", password);
-        // TODO: call the api to login
         navigate('/');
     }
 
