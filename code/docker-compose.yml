@@ -20,32 +20,49 @@ services:
             timeout: 10s
             retries: 5
 
+    python-server:
+      build:
+        context: ./server
+        dockerfile: ./Dockerfile.python
+      container_name: baselhack-2024-python
+      restart: always
+      ports:
+        - "5000:5000"
+      expose:
+        - 5000
+      volumes:
+        - ./server/ai:/app/ai
+      networks:
+        - local
+
     server:
-        build:
-            context: ./server
-            dockerfile: ./Dockerfile
-        restart: always
-        depends_on:
-            database:
-                condition: service_healthy
-        container_name: baselhack-2024-server
-        environment:
-            - PORT=4242
-            - DATABASE_HOSTNAME=database
-            - MIGRATE=${MIGRATE:-true}
-            - PROD=${PROD:-false}
-            - SECRET=secret
-            - JWT_SECRET=jwt_secret
-        ports:
-            - 4242:4242
-        expose:
-            - 4242
-        volumes:
-            - ./server/src:/build_/src
-        networks:
-            - local
-        command: >
-            sh -c "scripts/start-server.sh"
+      build:
+        context: ./server
+        dockerfile: ./Dockerfile
+      restart: always
+      depends_on:
+        database:
+          condition: service_healthy
+        python-server:
+          condition: service_started
+      container_name: baselhack-2024-server
+      environment:
+        - PORT=4242
+        - DATABASE_HOSTNAME=database
+        - MIGRATE=${MIGRATE:-true}
+        - PROD=${PROD:-false}
+        - SECRET=secret
+        - JWT_SECRET=jwt_secret
+      ports:
+        - "4242:4242"
+      expose:
+        - 4242
+      volumes:
+        - ./server/src:/build_/src
+      networks:
+        - local
+      command: >
+        sh -c "scripts/start-server.sh"
 
     client:
         build:
