@@ -2,6 +2,7 @@ import { Button, Flex, Form, Input } from 'antd';
 import { useAuth } from '../auth/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Title from 'antd/es/typography/Title';
 
 
 function Login() {
@@ -20,7 +21,8 @@ function Login() {
     }
 
     return (
-        <Flex>
+        <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg mx-auto m-5" vertical>
+            <Title level={2} className="text-center">Login</Title>
             <Form
                 layout='vertical'
                 onFinish={handleLogin}

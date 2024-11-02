@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 import { Button, Flex, Form, Input, Progress } from "antd";
+import Title from "antd/es/typography/Title";
 
 function Signup() {
     const {login} = useAuth();
@@ -57,13 +58,14 @@ function Signup() {
     };
 
     return (
-        <Flex>
+        <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg mx-auto m-5" vertical>
+            <Title level={2} className="text-center">Signup</Title>
             <Form
                 layout='vertical'
                 onFinish={handleSignup}
                 initialValues={{ remember: true }}
+                className="text-right"
             >
-                {/* TODO: create a simple text */}
                 <Form.Item
                     label='Firstname'
                     name='firstname'
@@ -109,6 +111,7 @@ function Signup() {
                 <Button
                     type='primary'
                     htmlType='submit'
+                    style={{alignSelf: 'right'}}
                 >
                     Signup
                 </Button>
