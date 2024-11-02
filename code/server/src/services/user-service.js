@@ -1,3 +1,5 @@
+import { bycrypt } from 'bcryptjs';
+
 export class UserService {
   constructor(userRepository) {
     this.userRepository = userRepository;
@@ -25,5 +27,15 @@ export class UserService {
 
   async deleteUser(id) {
     return await this.userRepository.deleteUser(id);
+  }
+
+  async authicateUser(email, password) {
+    const user = await this.userRepository.getUserByEmail(email, false);
+    try {
+      bycrypt.compare(password, user.password);
+    } catch (err) {
+      return null;
+    }
+    return user;
   }
 }
