@@ -8,7 +8,7 @@ export default class JWTService {
   signToken = (payload, expiresIn = '72h') => {
     try {
       const token = jwt.sign(payload, this.secretKey, { expiresIn });
-      return `Beare ${token}`;
+      return `Bearer ${token}`;
     } catch (error) {
       console.error('Error signing the token:', error);
       throw new Error('Error when signing token: ', error);
@@ -18,7 +18,7 @@ export default class JWTService {
   signTokenNoExpiration = (payload) => {
     try {
       const token = jwt.sign(payload, this.secretKey);
-      return `Beare ${token}`;
+      return `Bearer ${token}`;
     } catch (error) {
       console.error('Error signing the token:', error);
       throw new Error('Error when signing token: ', error);
