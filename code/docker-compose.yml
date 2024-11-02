@@ -1,0 +1,63 @@
+services:
+  database:
+    image: postgres:latest
+    container_name: baselhack-2024-database
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - '$POSTGRES_PORT:$POSTGRES_PORT'
+    expose:
+      - $POSTGRES_PORT
+    networks:
+      - local
+    volumes:
+      - ./.postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build: 
+      context: ./server
+      dockerfile: ./Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    container_name: baselhack-2024-server
+    env_file:
+      - .env
+    environment:
+      - MIGRATE=${MIGRATE:-true}
+      - LOCAL=${MIGRATE:-true}
+    ports:
+      - '$PORT:$PORT'
+    expose:
+      - $PORT
+    volumes:
+      - ./server/src:/build_/src
+    networks:
+      - local
+  
+  client:
+    build: 
+      context: ./client
+      dockerfile: ./Dockerfile
+    container_name: baselhack-2024-client
+    depends_on:
+      - server
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - local
+
+
+networks:
+  local:
+    driver: bridge
