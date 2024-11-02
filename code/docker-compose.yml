@@ -32,7 +32,7 @@ services:
     container_name: baselhack-2024-server
     environment:
       - PORT=4242
-      - DATABASE_URL=postgresql://postgres:postgres@database:5432/baselhack?sslMode=require
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/baselhack
       - MIGRATE=${MIGRATE:-true}
       - LOCAL=${MIGRATE:-true}
     ports:

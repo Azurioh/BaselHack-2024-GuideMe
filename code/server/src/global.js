@@ -16,3 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use('/users', userRouter);
+
+app.use('/*', (req, res) => {
+  res.status(404).json({ err: 'Route not found.' });
+});
