@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 import { Button, Flex, Form, Input, Progress } from "antd";
@@ -123,6 +123,12 @@ function Register() {
                             {strength === 3 && 'Good'}
                             {strength === 4 && 'Strong'}
                         </span>
+                    </div>
+                </Form.Item>
+                <Form.Item>
+                    <div className="text-center">
+                        <span>Already have an account ? </span>
+                        <Link to={"/login"}>Login</Link>
                     </div>
                 </Form.Item>
                 <Button

@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input } from 'antd';
 import { useAuth } from '../auth/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Title from 'antd/es/typography/Title';
 
@@ -40,6 +40,12 @@ function Login() {
                     rules={[{ required: true, message: 'Please input your password!'}]}
                 >
                     <Input.Password onChange={(e) => setPassword(e.target.value)}/>
+                </Form.Item>
+                <Form.Item>
+                    <div className="text-center">
+                        <span>Don't have an account ? </span>
+                        <Link to={"/register"}>Register</Link>
+                    </div>
                 </Form.Item>
                 <Button
                     type='primary'

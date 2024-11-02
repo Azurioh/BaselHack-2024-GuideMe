@@ -25,7 +25,7 @@ const CardTableProfile = ({ Guides, currentUser }) => {
       className='w-4/5'
       title={currentFilter}
     >
-    <Radio.Group value={currentFilter} onChange={(e) => setCurrentFilter(e.target.value)}>
+    <Radio.Group value={currentFilter} onChange={(e) => setCurrentFilter(e.target.value)} style={{marginBottom: "10px"}}>
       <Radio.Button value='My Guides'>My Guides</Radio.Button>
       <Radio.Button value='Liked Guides'>Liked Guides</Radio.Button>
       <Radio.Button value='Saved Guides'>Saved Guides</Radio.Button>
