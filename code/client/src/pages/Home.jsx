@@ -15,7 +15,15 @@ function Home() {
 
   async function fetchGuide() {
     try {
-      const response = await axios.get('api/guidelines');
+      const response = await axios.get('api/guidelines',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          },
+          withCredentials: true
+        }
+      );
       console.log(response.data.guidelines);
       setGuide(response.data.guidelines);
     } catch (error) {

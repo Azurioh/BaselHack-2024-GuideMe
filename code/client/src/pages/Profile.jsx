@@ -3,6 +3,7 @@ import { Form, Input, Table, Typography, Card } from 'antd';
 import CardTableProfile from '../Component/cardTableProfile';
 import LanguageSelector from '../Component/LanguageSelector';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const { Title } = Typography;
 
@@ -16,13 +17,31 @@ const Profile = () => {
 
   const [Guides, setGuides] = useState([]);
 
-  useEffect(() => {
-    setProfile({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: 1, likedGuides: [1], savedGuides: [2] });
+  const fetchProfile = async () => {
+    try {
+      const response = await axios.get('/api/users/me',
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      setProfile(data);
+    } catch (error) {
+      console.error(error);
+    };
+  }
 
-    setGuides([
-      { key: '1', title: 'Guide 1', description: 'This is my first guide', id: 1, author: { id: 1 } },
-      { key: '2', title: 'Guide 2', description: 'This is my second guide', id: 2, author: { id: 1 } },
-    ]);
+  useEffect(() => {
+    fetchProfile();
+    // setProfile({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: 1, likedGuides: [1], savedGuides: [2] });
+
+    // setGuides([
+    //   { key: '1', title: 'Guide 1', description: 'This is my first guide', id: 1, author: { id: 1 } },
+    //   { key: '2', title: 'Guide 2', description: 'This is my second guide', id: 2, author: { id: 1 } },
+    // ]);
   }, []);
 
   const columns = [
