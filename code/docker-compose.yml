@@ -35,7 +35,7 @@ services:
     networks:
       - local
     storage_opt:
-      size: "10G"
+      size: "20G"
 
   server:
     build:
