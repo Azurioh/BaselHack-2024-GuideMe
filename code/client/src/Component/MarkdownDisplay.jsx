@@ -2,6 +2,7 @@ import { Button, Flex, message } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import { FiCopy } from 'react-icons/fi';
 import { FaFilePdf, FaFileWord } from 'react-icons/fa';
+import axios from 'axios';
 
 
 const MarkdownDisplay = ({ title, text }) => {
@@ -10,26 +11,63 @@ const MarkdownDisplay = ({ title, text }) => {
         message.success('Copied to clipboard');
     }
 
-    function handleDownloadPDF() {
-        // TODO: call the server to get the pdf
-        const data = {
-            title: title,
-            markdownContent: text,
-            format: "pdf"
+
+    async function handleDownloadPDF() {
+        try {
+            const response = await axios.post('/api/guidelines/markdownToPdf', {
+                title: title,
+                markdownContent: text,
+                format: "pdf"
+            }, {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                },
+                responseType: 'blob'
+            });
+
+            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            const downloadUrl = window.URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `output.docx`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+            console.error('Erreur lors du téléchargement du fichier:', error.message);
         }
-        console.log(data);
-        console.log('Download PDF');
     }
 
-    function handleDownloadDOCX() {
-        // TODO: call the server to get the docx
-        const data = {
-            title: title,
-            markdownContent: text,
-            format: "docx"
+    async function handleDownloadDOCX() {
+        try {
+            const response = await axios.post('/api/guidelines/markdownToPdf', {
+                title: title,
+                markdownContent: text,
+                format: "docx"
+            }, {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                },
+                responseType: 'blob'
+            });
+
+            const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            const downloadUrl = window.URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `output.docx`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+            console.error('Erreur lors du téléchargement du fichier:', error.message);
         }
-        console.log(data);
-        console.log('Download DOCX');
     }
 
     return (

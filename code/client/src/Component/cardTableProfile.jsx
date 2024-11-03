@@ -11,15 +11,22 @@ const CardTableProfile = ({ Guides, currentUser }) => {
   const [savedGuides, setSavedGuides] = useState([]);
 
   useEffect(() => {
+    const myGuidesTemp = [];
+    const likedGuidesTemp = [];
+    const savedGuidesTemp = [];
+
+    // Populate temporary arrays
     Guides.forEach((guide) => {
-      if (guide.creator.id === currentUser.id)
-        setMyGuides([...myGuides, guide]);
-      if (guide.likedBy.includes(currentUser.id))
-        setLikedGuides([...likedGuides, guide]);
-      if (guide.savedBy.includes(currentUser.id))
-        setSavedGuides([...savedGuides, guide]);
+      if (guide.creator.id === currentUser.id) myGuidesTemp.push(guide);
+      if (guide.likedBy.includes(currentUser.id)) likedGuidesTemp.push(guide);
+      if (guide.savedBy.includes(currentUser.id)) savedGuidesTemp.push(guide);
     });
-  }, [Guides, currentUser, myGuides, likedGuides, savedGuides]);
+
+    // Update state once with the complete arrays
+    setMyGuides(myGuidesTemp);
+    setLikedGuides(likedGuidesTemp);
+    setSavedGuides(savedGuidesTemp);
+  }, [Guides]);
 
   return (
     <Card

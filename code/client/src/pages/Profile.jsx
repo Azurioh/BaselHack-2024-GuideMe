@@ -61,11 +61,6 @@ const Profile = () => {
     if (profile.id !== -1) getGuides();
   }, [profile]);
 
-  const columns = [
-    { title: 'Title', dataIndex: 'title', key: 'title' },
-    { title: 'Description', dataIndex: 'description', key: 'description' }
-  ];
-
   return (
     <div className='w-full h-full flex flex-col items-center justify-center pt-10 space-y-10'>
       <Card
