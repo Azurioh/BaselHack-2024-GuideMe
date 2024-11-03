@@ -24,10 +24,18 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
   }, [data])
 
   const toggleLike = (key) => {
-    const updatedData = tableData.map((item) =>
-      item.key === key ? { ...item, liked: !item.liked } : item
-    );
-    setTableData(updatedData);
+    console.log(key);
+    setTableData(prevTableData => {
+      const updatedData = prevTableData.map((item) =>
+        item.key === key ? {
+          ...item,
+          liked: !item.liked,
+          likes: item.liked ? item.likes - 1 : item.likes + 1
+        } : item
+      );
+      return updatedData;
+    });
+    // TODO: call the api to like
   };
 
   const getUniqueTags = (data) => {
