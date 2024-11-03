@@ -3,6 +3,7 @@ import { Table, Space, Tag, Button } from 'antd';
 import { PlusOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import GuideDetail from './GuideDetail';
+import axios from 'axios';
 
 const { Column } = Table;
 
@@ -27,7 +28,7 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
     setTableData(transformedData);
   }, [data])
 
-  const toggleLike = (key) => {
+  const toggleLike = async (key) => {
     console.log(key);
     setTableData(prevTableData => {
       const updatedData = prevTableData.map((item) =>
@@ -39,7 +40,15 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
       );
       return updatedData;
     });
-    // TODO: call the api to like
+    await axios.post(
+      `/api/users/like/${key}`,
+      {},
+      {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      },
+    );
   };
 
   const getUniqueTags = (data) => {
