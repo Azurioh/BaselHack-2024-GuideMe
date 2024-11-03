@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, Space, Tag, Button } from 'antd';
 import { PlusOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -7,10 +7,21 @@ import GuideDetail from './GuideDetail';
 const { Column } = Table;
 
 const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props }) => {
-  const [tableData, setTableData] = useState(data);
+  const [tableData, setTableData] = useState(null);
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const {t} = useTranslation();
+
+  useEffect(() => {
+    const transformedData = data.map(item => ({
+      ...item,
+      key: item.id,
+      author: `${item.creator.firstName} ${item.creator.lastName}`,
+      likes: item.likedBy.length,
+      liked: item.likedBy.find((user) => user.id === 1) ? true : false,
+    }));
+    setTableData(transformedData);
+  }, [data])
 
   const toggleLike = (key) => {
     const updatedData = tableData.map((item) =>
@@ -19,15 +30,26 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
     setTableData(updatedData);
   };
 
-  const uniqueTags = Array.from(
-    new Set(data.flatMap((item) => item.tags))
-  ).map((tag) => ({ text: tag, value: tag }));
+  const getUniqueTags = (data) => {
+    if (!data || !Array.isArray(data)) return [];
+    const allTags = data.reduce((tags, item) => {
+      if (item.keywords && Array.isArray(item.keywords)) {
+        return [...tags, ...item.keywords];
+      }
+      return tags;
+    }, []);
+    return [...new Set(allTags)].map(tag => ({
+      text: tag,
+      value: tag
+    }));
+  };
 
   function handleRowClick(record) {
-    console.log("clicked");
     setSelectedGuide(record);
     setModalVisible(true);
   }
+
+  const uniqueTags = getUniqueTags(data);
 
   return (
     <>
@@ -47,15 +69,15 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
           title={t("components.table.likes")}
           dataIndex="likes"
           key="likes"
-          onFilter={(value, record) => record.likes === value}
-          sorter={(a, b) => a.likes - b.likes}
+          onFilter={(value, record) => record.liked === value}
+          sorter={(a, b) => a.liked - b.liked}
           defaultSortOrder={'descend'}
         />
         <Column
           title={t("components.table.tags")}
-          dataIndex="tags"
-          key="tags"
-          render={(tags) => (
+          dataIndex="keywords"
+          key="keywords"
+          render={(tags = []) => (
             <>
               {tags.map((tag, index) => {
                 let color = tag.length > 5 ? 'geekblue' : 'green';
@@ -71,9 +93,8 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
               })}
             </>
           )}
-          showSorterTooltip={'full-header'}
           filters={uniqueTags}
-          onFilter={(value, record) => record.tags.includes(value)}
+          onFilter={(value, record) => record.keywords.includes(value)}
           sortDirections={'descend'}
         />
         <Column
