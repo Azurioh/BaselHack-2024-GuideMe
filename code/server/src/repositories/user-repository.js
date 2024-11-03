@@ -1,7 +1,7 @@
 import { prisma } from '../global.js';
 
 export class UserRepository {
-  async getAllUsers(includePassword = false) {
+  async getAllUsers(includePassword) {
     return await prisma.user.findMany({
       select: {
         id: true,
@@ -16,7 +16,7 @@ export class UserRepository {
     });
   }
 
-  async getUserById(id, includeGuide, includePassword = false) {
+  async getUserById(id, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { id },
       select: {
@@ -32,7 +32,7 @@ export class UserRepository {
     });
   }
 
-  async getUserByEmail(email, includeGuide, includePassword = false) {
+  async getUserByEmail(email, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { email },
       select: {
@@ -48,7 +48,7 @@ export class UserRepository {
     });
   }
 
-  async createUser(userData, includePassword = false) {
+  async createUser(userData, includePassword) {
     return await prisma.user.create({
       data: userData,
       select: {
@@ -64,7 +64,7 @@ export class UserRepository {
     });
   }
 
-  async updateUser(id, userData, includePassword = false) {
+  async updateUser(id, userData, includePassword) {
     return await prisma.user.update({
       where: { id },
       data: userData,
