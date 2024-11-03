@@ -1,3 +1,4 @@
+import getYogaGuide from "./getInstructions.js";
 import { promises as fs } from 'fs';
 
 export class GuidelineService {
@@ -15,6 +16,7 @@ export class GuidelineService {
 
   async createGuideline(guidelineData) {
     try {
+        guidelineData.result = await getYogaGuide(guidelineData.title);
         const imageData = guidelineData.imgs
 
         const response = await fetch('http://python-server:5000/classify-yoga', {
