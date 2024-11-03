@@ -14,13 +14,13 @@ export class GuidelineService {
     return await this.guidelineRepository.getGuidelineById(id);
   }
 
-  async createGuideline(guidelineData) {
+  async createGuideline(guidelineData, id) {
     try {
-        guidelineData.result = await getYogaGuide(guidelineData.title);
-        const imageData = guidelineData.imgs
+      const imageData = guidelineData.imgs
 
-        const response = await fetch('http://python-server:5000/classify-yoga', {
-            method: 'POST',
+      guidelineData.creatorId = id;
+      const response = await fetch('http://python-server:5000/classify-yoga', {
+        method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -30,10 +30,13 @@ export class GuidelineService {
         });
 
         const result = await response.json();
-        console.log("Classification result:", result);
+        if (result.error || !result.pose_name) {
+            throw new Error(result.error);
+        }
+        guidelineData.result = await getYogaGuide(result.pose_name);
 
     } catch (error) {
-        console.error("Classification error:", error);
+      console.error("Classification error:", error);
     }
     return await this.guidelineRepository.createGuideline(guidelineData);
   }

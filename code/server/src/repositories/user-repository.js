@@ -1,39 +1,84 @@
 import { prisma } from '../global.js';
 
 export class UserRepository {
-  async getAllUsers() {
-    return await prisma.user.findMany({});
+  async getAllUsers(includePassword) {
+    return await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: false,
+        likes: false,
+        saved: false,
+        password: includePassword,
+      },
+    });
   }
 
-  async getUserById(id, includeGuide) {
+  async getUserById(id, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
         guidelines: includeGuide,
         likes: includeGuide,
-        saved: includeGuide
-      }
+        saved: includeGuide,
+        password: includePassword,
+      },
     });
   }
 
-  async getUserByEmail(email, includeGuide) {
+  async getUserByEmail(email, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { email },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
         guidelines: includeGuide,
         likes: includeGuide,
-        saved: includeGuide
-      }
+        saved: includeGuide,
+        password: includePassword,
+      },
     });
   }
 
-
-  async createUser(userData) {
-    return await prisma.user.create({ data: userData });
+  async createUser(userData, includePassword) {
+    return await prisma.user.create({
+      data: userData,
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: true,
+        likes: true,
+        saved: true,
+        password: includePassword,
+      },
+    });
   }
 
-  async updateUser(id, userData) {
-    return await prisma.user.update({ where: { id }, data: userData });
+  async updateUser(id, userData, includePassword) {
+    return await prisma.user.update({
+      where: { id },
+      data: userData,
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: true,
+        likes: true,
+        saved: true,
+        password: includePassword,
+      },
+    });
   }
 
   async deleteUser(id) {
@@ -45,9 +90,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         likes: {
-          connect: { id: guidelineId }
-        }
-      }
+          connect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -56,9 +101,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         likes: {
-          disconnect: { id: guidelineId }
-        }
-      }
+          disconnect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -67,9 +112,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         saved: {
-          connect: { id: guidelineId }
-        }
-      }
+          connect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -78,9 +123,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         saved: {
-          disconnect: { id: guidelineId }
-        }
-      }
+          disconnect: { id: guidelineId },
+        },
+      },
     });
   }
 }

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 import { fileURLToPath } from 'url';
+import { parseTokenData } from '../libs/token.js  ';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,8 +39,9 @@ export class GuidelineController {
   createGuideline = async (req, res) => {
     try {
       const guidelineData = req.body;
+      const token = parseTokenData(req);
 
-      const guideline = await this.guidelineService.createGuideline(guidelineData);
+      const guideline = await this.guidelineService.createGuideline(guidelineData, token.id);
 
       res.status(201).json({ data: { guideline } });
     } catch (err) {

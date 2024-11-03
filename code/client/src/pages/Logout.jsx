@@ -14,6 +14,7 @@ const Logout = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/login');
+      localStorage.removeItem('token');
       logout();
     }, 3000);
 

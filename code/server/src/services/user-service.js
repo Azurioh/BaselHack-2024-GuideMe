@@ -3,24 +3,24 @@ export class UserService {
     this.userRepository = userRepository;
   }
 
-  async getAllUsers() {
-    return await this.userRepository.getAllUsers();
+  async getAllUsers(includePassword = false) {
+    return await this.userRepository.getAllUsers(includePassword);
   }
 
-  async getUserById(id, includeGuide) {
-    return await this.userRepository.getUserById(id, includeGuide);
+  async getUserById(id, includeGuide, includePassword = false) {
+    return await this.userRepository.getUserById(id, includeGuide, includePassword);
   }
 
-  async getUserByEmail(email, includeGuide) {
-    return await this.userRepository.getUserByEmail(email, includeGuide);
+  async getUserByEmail(email, includeGuide, includePassword = false) {
+    return await this.userRepository.getUserByEmail(email, includeGuide, includePassword);
   }
 
-  async createUser(userData) {
-    return await this.userRepository.createUser(userData);
+  async createUser(userData, includePassword = false) {
+    return await this.userRepository.createUser(userData, includePassword);
   }
 
-  async updateUser(id, userData) {
-    return await this.userRepository.updateUser(id, userData);
+  async updateUser(id, userData, includePassword = false) {
+    return await this.userRepository.updateUser(id, userData, includePassword);
   }
 
   async deleteUser(id) {

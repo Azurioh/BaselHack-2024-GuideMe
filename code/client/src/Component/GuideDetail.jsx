@@ -24,7 +24,7 @@ function GuideDetail(props) {
 
     return (
         <Modal
-            title={<Title level={2} className="text-center">{props.guide?.title}</Title>}
+            title={<Title level={2} className="text-center">{props.guide?.result?.title}</Title>}
             open={props.visible}
             onCancel={props.onClose}
             footer={null}
@@ -43,14 +43,14 @@ function GuideDetail(props) {
                 ))}
             </div>
 
-            {props.guide?.images && props.guide.images.length > 0 && (
+            {props.guide?.imgs && props.guide.imgs.length > 0 && (
                 <div style={{textAlign: 'center', alignItems: 'center'}}>
                     <Title level={4}>{t("components.guide_details.images")}</Title>
                     <Carousel autoplay infinite>
-                        {props.guide.images.map((image, index) => (
+                        {props.guide.imgs.map((image, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '300px', }}>
                                 <img
-                                    src={image}
+                                    src={`data:image/jpeg;base64,${image}`}
                                     alt={`Image ${index + 1}`}
                                     style={{ width: '100%', maxHeight: '300px', objectFit: 'contain' }}
                                 />
@@ -81,7 +81,7 @@ function GuideDetail(props) {
 
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
                 <Title level={4}>{t("components.guide_details.description")}</Title>
-                <MarkdownDisplay text={props.guide?.description} title={props.guide?.title}/>
+                <MarkdownDisplay text={props.guide?.result.content} title={props.guide?.title}/>
             </div>
         </Modal>
     )

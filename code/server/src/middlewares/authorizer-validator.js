@@ -5,11 +5,11 @@ const authorizerValidator = () => {
 
   return (req, res, next) => {
     try {
-      if (!req.authorization) {
+      if (!req.headers.authorization) {
         return res.status(403).json({ err: 'Forbidden.' });
       }
 
-      const token = req.authorization.split(' ');
+      const token = req.headers.authorization.split(' ');
       if (token.length !== 2 || token[0] !== 'Bearer') {
         return res.status(403).json({ err: 'Forbidden.' });
       }

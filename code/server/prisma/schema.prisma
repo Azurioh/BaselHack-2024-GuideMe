@@ -28,7 +28,6 @@ model Guideline {
   imgs      String[]
   keywords  String[]
   result    Json?
-  likes     Int
   creator   User?     @relation("CreatedGuidelines", fields: [creatorId], references: [id])
   creatorId Int?
   likedBy   User[]    @relation("LikedGuidelines")
