@@ -25,7 +25,7 @@ model User {
 model Guideline {
   id        Int       @id @default(autoincrement())
   title     String
-  imgs      String[] @db.Text[]
+  imgs      String[]
   keywords  String[]
   result    Json?
   likes     Int

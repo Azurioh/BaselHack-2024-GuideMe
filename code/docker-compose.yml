@@ -34,8 +34,6 @@ services:
       - ./server/ai:/app/ai
     networks:
       - local
-    storage_opt:
-      size: "20G"
 
   server:
     build:
