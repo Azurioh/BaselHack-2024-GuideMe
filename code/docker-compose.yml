@@ -20,6 +20,23 @@ services:
       timeout: 10s
       retries: 5
 
+  python-server:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile.python
+    container_name: baselhack-2024-python
+    restart: always
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    volumes:
+      - ./server/ai:/app/ai
+    networks:
+      - local
+    storage_opt:
+      size: "20G"
+
   server:
     build:
       context: ./server
@@ -28,6 +45,8 @@ services:
     depends_on:
       database:
         condition: service_healthy
+      python-server:
+        condition: service_started
     container_name: baselhack-2024-server
     environment:
       - PORT=4242
@@ -37,7 +56,7 @@ services:
       - SECRET=secret
       - JWT_SECRET=jwt_secret
     ports:
-      - 4242:4242
+      - "4242:4242"
     expose:
       - 4242
     volumes:
