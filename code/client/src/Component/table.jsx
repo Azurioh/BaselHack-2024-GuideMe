@@ -13,6 +13,10 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
   const {t} = useTranslation();
 
   useEffect(() => {
+    if (data == undefined || data.length === 0) {
+      setTableData([]);
+      return;
+    }
     const transformedData = data.map(item => ({
       ...item,
       key: item.id,

@@ -12,6 +12,26 @@ const FormCreateGuide = (closeModal, reset) => {
   const [images, setImages] = useState([]);
   const {t} = useTranslation();
 
+  function extractBase64(dataUrl) {
+    if (!dataUrl.includes(',')) {
+        console.error("Invalid data URL: no comma found.");
+        return null;
+    }
+
+    const base64String = dataUrl.split(',')[1];
+
+    if (!base64String) {
+        console.error("Invalid data URL: base64 data is missing.");
+        return null;
+    }
+
+    return base64String;
+  }
+
+  function processedImages(images) {
+    return images.map(image => extractBase64(image)).filter(Boolean);
+  }
+
   const handleSubmit = async (values) => {
     try {
       console.log('Form Submitted:', values);
@@ -19,22 +39,21 @@ const FormCreateGuide = (closeModal, reset) => {
       console.log('Images:', images);
       await axios.post('/api/guidelines', {
         title: values.title,
-        description: values.description,
         keywords: tags,
-        imgs: images
-        // TODO: find a way to Add author
+        imgs: processedImages(images),
+        creatorId: -1
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: localStorage.getItem('token')
         }
       });
       setTags([]);
       closeModal();
     } catch (error) {
       console.error(error);
-      message.error('An error occurred, please try again');
       form.resetFields();
+      closeModal();
     }
   };
 
@@ -69,16 +88,6 @@ const FormCreateGuide = (closeModal, reset) => {
       <Form.Item
         label=""
         name="description"
-        rules={[{
-          required: true,
-          validator: (_, value) => {
-              if (images.length <= 1) {
-                console.log(images);
-                return Promise.reject(new Error(t("components.create_guide.description")));
-            }
-            return Promise.resolve();
-          },
-        }]}
       >
         <DragAndDrop onImagesChange={setImages}/>
       </Form.Item>

@@ -12,11 +12,11 @@ const CardTableProfile = ({ Guides, currentUser }) => {
 
   useEffect(() => {
     Guides.forEach((guide) => {
-      if (guide.author.id === currentUser.id)
+      if (guide.creator.id === currentUser.id)
         setMyGuides([...myGuides, guide]);
-      if (currentUser.likedGuides.includes(guide.id))
+      if (guide.likedBy.includes(currentUser.id))
         setLikedGuides([...likedGuides, guide]);
-      if (currentUser.savedGuides.includes(guide.id))
+      if (guide.savedBy.includes(currentUser.id))
         setSavedGuides([...savedGuides, guide]);
     });
   }, [Guides, currentUser, myGuides, likedGuides, savedGuides]);

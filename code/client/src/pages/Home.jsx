@@ -19,13 +19,12 @@ function Home() {
         {
           headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${localStorage.getItem('token')}`
+            "Authorization": localStorage.getItem('token')
           },
           withCredentials: true
         }
       );
-      console.log(response.data.guidelines);
-      setGuide(response.data.guidelines);
+      setGuide(response.data.data.guidelines);
     } catch (error) {
       console.error(error);
     }

@@ -27,7 +27,7 @@ function Register() {
                 email: email,
                 password: password
             });
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('token', response.data.data.token);
             login();
             navigate('/application');
         } catch (error) {

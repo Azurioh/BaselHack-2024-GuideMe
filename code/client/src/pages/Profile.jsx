@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Table, Typography, Card } from 'antd';
+import { Form, Input, Table, Typography, Card, message } from 'antd';
 import CardTableProfile from '../Component/cardTableProfile';
 import LanguageSelector from '../Component/LanguageSelector';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,7 @@ const { Title } = Typography;
 const Profile = () => {
   const {t} = useTranslation();
   const [profile, setProfile] = useState({
+    id: -1,
     firstName: '',
     lastName: '',
     email: ''
@@ -22,11 +23,12 @@ const Profile = () => {
       const response = await axios.get('/api/users/me',
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: localStorage.getItem('token')
           }
         }
       );
-      const data = await response.json();
+      console.log(response.data);
+      const data = response.data.data.user;
       console.log(data);
       setProfile(data);
     } catch (error) {
@@ -34,15 +36,30 @@ const Profile = () => {
     };
   }
 
+  async function getGuides() {
+    if (profile.id === -1) return;
+    try {
+      const response = await axios.get('/api/guidelines',
+        {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        }
+      );
+      setGuides(response.data.data.guidelines);
+    } catch (error) {
+      console.error(error);
+      message.error('An error occurred when retrieving the guides');
+    }
+  }
+
   useEffect(() => {
     fetchProfile();
-    // setProfile({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', id: 1, likedGuides: [1], savedGuides: [2] });
-
-    // setGuides([
-    //   { key: '1', title: 'Guide 1', description: 'This is my first guide', id: 1, author: { id: 1 } },
-    //   { key: '2', title: 'Guide 2', description: 'This is my second guide', id: 2, author: { id: 1 } },
-    // ]);
   }, []);
+
+  useEffect(() => {
+    if (profile.id !== -1) getGuides();
+  }, [profile]);
 
   const columns = [
     { title: 'Title', dataIndex: 'title', key: 'title' },
@@ -58,13 +75,13 @@ const Profile = () => {
       >
         <Form layout="vertical">
           <Form.Item label={t("pages.profile.firstname")}>
-            <Input value={profile.firstName} readOnly />
+            <Input value={profile?.firstName} readOnly />
           </Form.Item>
           <Form.Item label={t("pages.profile.lastname")}>
-            <Input value={profile.lastName} readOnly />
+            <Input value={profile?.lastName} readOnly />
           </Form.Item>
           <Form.Item label={t("pages.profile.email")}>
-            <Input value={profile.email} readOnly />
+            <Input value={profile?.email} readOnly />
           </Form.Item>
           <LanguageSelector/>
         </Form>
