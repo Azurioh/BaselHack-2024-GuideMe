@@ -25,3 +25,4 @@ jobs:
             git pull origin main &&
             docker compose down -v &&
             PROD=true MIGRATE=false docker compose up -d --build
+          '
