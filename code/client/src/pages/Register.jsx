@@ -26,7 +26,7 @@ function Register() {
                 password: password
             });
             login();
-            navigate('/');
+            navigate('/application');
         } catch (error) {
             console.error(error);
         }
@@ -134,7 +134,7 @@ function Register() {
                         </Button>
                     </Form.Item>
                 </Form>
-                <Button className="mb-4" onClick={() => navigate('/login')} type='link'>Already have an account? Login here</Button>
+                <Button className="mb-4" onClick={() => navigate('/login')} type='link'>Already have an account ? Login here</Button>
             </Flex>
         </div>
     )

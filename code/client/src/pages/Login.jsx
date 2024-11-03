@@ -20,7 +20,7 @@ function Login() {
                 password: password
             });
             login();
-            navigate('/');
+            navigate('/application');
         } catch (error) {
             console.error(error);
         }
@@ -58,7 +58,7 @@ function Login() {
                         </Button>
                     </Form.Item>
                 </Form>
-                <Button onClick={() => navigate('/register')} type='link' className='mb-5'>Don't have an account? Register here</Button>
+                <Button onClick={() => navigate('/register')} type='link' className='mb-5'>Don't have an account ? Register here</Button>
             </Flex>
         </div>
     )
