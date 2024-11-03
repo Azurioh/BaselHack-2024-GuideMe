@@ -1,7 +1,7 @@
 import { prisma } from '../global.js';
 
 export class UserRepository {
-  async getAllUsers() {
+  async getAllUsers(includePassword) {
     return await prisma.user.findMany({
       select: {
         id: true,
@@ -11,12 +11,12 @@ export class UserRepository {
         guidelines: false,
         likes: false,
         saved: false,
-        password: false
-      }
+        password: includePassword,
+      },
     });
   }
 
-  async getUserById(id, includeGuide) {
+  async getUserById(id, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { id },
       select: {
@@ -27,12 +27,12 @@ export class UserRepository {
         guidelines: includeGuide,
         likes: includeGuide,
         saved: includeGuide,
-        password: false
-      }
+        password: includePassword,
+      },
     });
   }
 
-  async getUserByEmail(email, includeGuide) {
+  async getUserByEmail(email, includeGuide, includePassword) {
     return await prisma.user.findUniqueOrThrow({
       where: { email },
       select: {
@@ -43,12 +43,12 @@ export class UserRepository {
         guidelines: includeGuide,
         likes: includeGuide,
         saved: includeGuide,
-        password: false
-      }
+        password: includePassword,
+      },
     });
   }
 
-  async createUser(userData) {
+  async createUser(userData, includePassword) {
     return await prisma.user.create({
       data: userData,
       select: {
@@ -59,12 +59,12 @@ export class UserRepository {
         guidelines: true,
         likes: true,
         saved: true,
-        password: false
-      }
+        password: includePassword,
+      },
     });
   }
 
-  async updateUser(id, userData) {
+  async updateUser(id, userData, includePassword) {
     return await prisma.user.update({
       where: { id },
       data: userData,
@@ -76,8 +76,8 @@ export class UserRepository {
         guidelines: true,
         likes: true,
         saved: true,
-        password: false
-      }
+        password: includePassword,
+      },
     });
   }
 
@@ -90,9 +90,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         likes: {
-          connect: { id: guidelineId }
-        }
-      }
+          connect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -101,9 +101,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         likes: {
-          disconnect: { id: guidelineId }
-        }
-      }
+          disconnect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -112,9 +112,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         saved: {
-          connect: { id: guidelineId }
-        }
-      }
+          connect: { id: guidelineId },
+        },
+      },
     });
   }
 
@@ -123,9 +123,9 @@ export class UserRepository {
       where: { id: userId },
       data: {
         saved: {
-          disconnect: { id: guidelineId }
-        }
-      }
+          disconnect: { id: guidelineId },
+        },
+      },
     });
   }
 }

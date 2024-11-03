@@ -12,7 +12,7 @@ export class AuthController {
     const userData = req.body;
 
     try {
-      const user = await this.userService.getUserByEmail(userData.email, false);
+      const user = await this.userService.getUserByEmail(userData.email, false, true);
 
       if (!verifyPassword(userData.password, user.password)) {
         return res.status(404).json({ err: 'Email and/or password invalid.' });
