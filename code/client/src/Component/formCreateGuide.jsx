@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import DragAndDrop from "./dragAndDropImages";
 import TagInput from "./tagInput";
 import { useTranslation } from 'react-i18next';
+import axios from "axios";
+import { use } from "i18next";
 
-const FormCreateGuide = (closeModal) => {
+const FormCreateGuide = (closeModal, reset) => {
   const [form] = Form.useForm();
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
   const {t} = useTranslation();
 
-  const handleSubmit = (values) => {
-    console.log('Form Submitted:', values);
-    console.log('Tags:', tags);
-    console.log('Images:', images);
-    setTags([]);
+  const handleSubmit = async (values) => {
+    try {
+      console.log('Form Submitted:', values);
+      console.log('Tags:', tags);
+      console.log('Images:', images);
+      await axios.post('/api/guidelines', {
+        title: values.title,
+        description: values.description,
+        keywords: tags,
+        imgs: images
+        // TODO: find a way to Add author
+      });
+      setTags([]);
+      closeModal();
+    } catch (error) {
+      console.error(error);
+      message.error('An error occurred, please try again');
+      form.resetFields();
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -26,6 +42,10 @@ const FormCreateGuide = (closeModal) => {
   useEffect(() => {
     console.log(images);
   }, [images]);
+
+  useEffect(() => {
+    form.resetFields();
+  }, [reset]);
 
   return (
     <Form
