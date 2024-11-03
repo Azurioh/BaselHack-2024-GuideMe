@@ -1,4 +1,4 @@
-import { Button, Flex, Form, Input } from 'antd';
+import { Button, Flex, Form, Input, message } from 'antd';
 import { useAuth } from '../auth/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -25,6 +25,12 @@ function Login() {
             navigate('/application');
         } catch (error) {
             console.error(error);
+            if (error.status === 404)
+                message.error('User not found');
+            else if (error.status === 401)
+                message.error('Invalid password');
+            else
+                message.error('An error occurred');
         }
     }
 

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
-import { Button, Flex, Form, Input, Progress } from "antd";
+import { Button, Flex, Form, Input, message, Progress } from "antd";
 import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import Title from "antd/es/typography/Title";
@@ -31,6 +31,7 @@ function Register() {
             navigate('/application');
         } catch (error) {
             console.error(error);
+            message.error('An error occurred, please try again');
         }
     }
 
