@@ -1,35 +1,48 @@
-import { useState, useEffect } from 'react'
-import MyTable from './Component/table.jsx'
 import './global.css'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import NotFound from './pages/NotFound'
+import AuthorizedRoute from './Component/AuthorizedRoute'
+import { Layout } from 'antd'
+import LandingPage from './pages/LandingPage'
+import AppHeader from './Component/AppHeader'
+import Profile from './pages/Profile'
+import Logout from './pages/Logout'
 
-const data = [
-  { title:'Guide 1',author:'Ben Dover',rating:5,tags:['tag1','tag2','tag3'],liked:true,key:'1' },
-  { title:'Guide 2',author:'Ben Dover',rating:4,tags:['tag1','tag2','tag3'],liked:true,key:'2' },
-  { title:'Guide 3',author:'Ben Dover',rating:3,tags:['tag1','tag2','tag3'],liked:false,key:'3' },
-  { title:'Guide 4',author:'Ben Dover',rating:2,tags:['tag1','tag2','tag3'],liked:true,key:'4' },
-  { title:'Guide 5',author:'Ben Dover',rating:1,tags:['tag1','tag2','tag3'],liked:false,key:'5' },
-  { title:'Guide 6',author:'Ben Dover',rating:5,tags:['tag1','tag2','tag3'],liked:true,key:'6' },
-  { title:'Guide 7',author:'Ben Dover',rating:4,tags:['tag2','tag3'],liked:false,key:'7' },
-  { title:'Guide 8',author:'Ben Dover',rating:3,tags:['tag1','tag2','tag3'],liked:false,key:'8' },
-  { title:'Guide 9',author:'Ben Dover',rating:2,tags:['tag2','tag3'],liked:true,key:'9' },
-  { title:'Guide 10',author:'Ben Dover',rating:1,tags:['tag1','tag2','tag3'],liked:false,key:'10' },
-  { title:'Guide 11',author:'Ben Dover',rating:5,tags:['tag2','tag3'],liked:true,key:'11' },
-];
+import i18n from './lang/i18n';
+import { useEffect } from 'react'
 
 function App() {
+  const location = useLocation();
+  const displayHeader = location.pathname === "/application" || location.pathname === "/profile";
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
-    <>
-      <div className='h-full w-full lg:space-y-3 content-center pt-10'>
-        <h1 className='text-center text-5xl lg:text-9xl font-bold'>GuideMe.</h1>
-        <h1 className='text-center text-l lg:text-3xl'>create a guide for... anything</h1>
-        <div className='pt-10 lg:pt-40 h-full w-full flex lg:flex-row flex-col lg:space-x-3 lg:space-y-0 space-y-3 items-center justify-center'>
-          <MyTable
-            data={data}
-            addGuideButtonCallBack={() => console.log('add guide button clicked')}
-            />
-        </div>
-      </div>
-    </>
+    <Layout style={{
+      minHeight: '100vh',
+      backgroundImage: 'url("/background.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+    }}>
+      {displayHeader && <AppHeader />}
+
+      <Routes>
+        <Route path='/' element={<LandingPage/>} />
+        <Route path='/application' element={<AuthorizedRoute><Home/></AuthorizedRoute>} />
+        <Route path='/profile' element={<AuthorizedRoute><Profile/></AuthorizedRoute>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/logout' element={<Logout/>} />
+        <Route path='/*' element={<NotFound/>} />
+      </Routes>
+    </Layout>
   )
 }
 

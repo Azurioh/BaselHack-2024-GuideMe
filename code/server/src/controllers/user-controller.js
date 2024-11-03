@@ -7,8 +7,17 @@ export class UserController {
 
   getAllUsers = async (req, res) => {
     try {
-      const users = await this.userService.getAllUsers();
-      res.status(200).json({ data: { users } });
+      const includeGuide = req.query.includeGuide === 'true';
+
+      const users = await this.userService.getAllUsers(includeGuide);
+
+      res.status(200).json({
+        data: users.map((user) => {
+          const { password, ...userData } = user;
+
+          return userData;
+        }),
+      });
     } catch (err) {
       console.error(err);
       res.status(500).json({ err: 'Internal server error.' });
@@ -17,10 +26,30 @@ export class UserController {
 
   getUserById = async (req, res) => {
     try {
-      const id = parseInt(req.params.id);
+      const { id } = req.body;
       const includeGuide = req.query.includeGuide === 'true';
+
       const user = await this.userService.getUserById(id, includeGuide);
-      res.status(200).json({ data: { user } });
+
+      const { password, ...userData } = user;
+
+      res.status(200).json({ data: userData });
+    } catch (err) {
+      console.error(err);
+      res.status(400).json({ err: 'User not found.' });
+    }
+  };
+
+  getUserByEmail = async (req, res) => {
+    try {
+      const { email } = req.body;
+      const includeGuide = req.query.includeGuide === 'true';
+
+      const user = await this.userService.getUserByEmail(email, includeGuide);
+
+      const { password, ...userData } = user;
+
+      res.status(200).json({ data: userData });
     } catch (err) {
       console.error(err);
       res.status(400).json({ err: 'User not found.' });
@@ -39,20 +68,6 @@ export class UserController {
     }
   };
 
-  // createUser = async (req, res) => {
-  //   try {
-  //     const userData = req.body;
-
-  //     userData.password = await bcrypt.hash(userData.password, 10);
-
-  //     const user = await this.userService.createUser(userData);
-  //     res.status(201).json({ data: { user } });
-  //   } catch (err) {
-  //     console.error(err);
-  //     res.status(500).json({ err: 'Internal server error.' });
-  //   }
-  //   res.status(201).json({ data: user, token: this.createToken(user.firstname, user.lastname) });
-  // };
 
   updateUser = async (req, res) => {
     try {

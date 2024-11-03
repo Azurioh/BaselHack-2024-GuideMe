@@ -25,4 +25,5 @@
 #             git pull origin main &&
 #             docker compose down -v &&
 #             PROD=true MIGRATE=false docker compose up database server client-d --build
+#             PROD=true MIGRATE=false docker compose up -d --build
 #           '
