@@ -27,7 +27,7 @@ model Guideline {
   title     String
   imgs      String[]
   keywords  String[]
-  result    String
+  result    Json?
   likes     Int
   creator   User?     @relation("CreatedGuidelines", fields: [creatorId], references: [id])
   creatorId Int?

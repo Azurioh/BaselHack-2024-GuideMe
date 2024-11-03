@@ -1,3 +1,5 @@
+import getYogaGuide from "./getInstructions.js";
+
 export class GuidelineService {
   constructor(guidelineRepository) {
     this.guidelineRepository = guidelineRepository;
@@ -12,6 +14,7 @@ export class GuidelineService {
   }
 
   async createGuideline(guidelineData) {
+    guidelineData.result = await getYogaGuide(guidelineData.title);
     return await this.guidelineRepository.createGuideline(guidelineData);
   }
 
