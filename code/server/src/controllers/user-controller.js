@@ -1,4 +1,4 @@
-import { parseTokenData } from '../libs/token';
+import { parseTokenData } from '../libs/token.js  ';
 
 export class UserController {
   constructor(userService) {
