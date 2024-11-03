@@ -1,4 +1,4 @@
-import JWTService from '../services/jwt-service';
+import JWTService from '../services/jwt-service.js';
 
 const jwtService = new JWTService();
 
