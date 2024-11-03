@@ -81,10 +81,11 @@ docker-compose up --build
 
 ## 🔄 Development Workflow
 
-1. Features and bugs are tracked in Jira
-2. Code changes are version-controlled through GitHub
-3. CI/CD pipeline automatically builds and tests changes
-4. Docker ensures consistent deployment across environments
+Our deployment process is streamlined through GitHub Actions:
+
+1. Push to main branch triggers automatic deployment
+2. GitHub Actions rebuilds and redeploys Docker containers on our VPS
+3. Application is automatically updated with zero downtime
 
 ## 👥 Team
 - [@Antoine Grand](https://github.com/agrand2004)
