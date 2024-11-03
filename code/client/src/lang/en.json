@@ -1,5 +1,97 @@
 {
-    "home" : {
-        "description": "Create a guide for ... anything"
+    "pages" : {
+        "home" : {
+            "description": "Create a guide for ... anything"
+        },
+        "landing_page" : {
+            "title" : "Welcome to GuideMe by Endress+Hauser",
+            "description": "At Endress+Hauser, we build advanced measurement devices for the process automation industry. With countless devices come countless assembly guides. Why not generate these guides automatically, based on a sequence of images? GuideMe does just that - saving time and resources.",
+            "application" : {
+                "title" : "Generate Guides from Your Images",
+                "description": "Turn image sequences into structured guides for assembling devices, performing yoga routines, or even cooking recipes. The possibilities are endless. Select your preferred output format, and let the guide generation begin!",
+                "button" : "Access Application"
+            }
+        },
+        "login" : {
+            "title" : "Login",
+            "email" : "Email",
+            "input_email" : "Please enter your email.",
+            "password" : "Password",
+            "input_password" : "Please enter your password.",
+            "button" : "Login",
+            "no_account" : "Don't have an account ? Register here"
+        },
+        "logout" : {
+            "title" : "You are logging out",
+            "subtitle" : "You will be redirected to the login page..."
+        },
+        "not_found" : {
+            "title" : "404",
+            "subtitle" : "Not Found",
+            "description": "The page you are looking for doesn't exist or has been moved.",
+            "button" : "Back to Home"
+        },
+        "register" : {
+            "title" : "Register",
+            "firstname" : "Firstname",
+            "lastname" : "Lastname",
+            "email" : "Email",
+            "password" : "Password",
+            "firstname_enter" : "Please enter your firstname.",
+            "lastname_enter" : "Please enter your lastanme.",
+            "email_enter" : "Please enter your email.",
+            "password_enter" : "Please enter at least one tag.",
+            "password_stage" : {
+                "weak" : "Weak",
+                "fair" : "Fair",
+                "good" : "Good",
+                "strong" : "Strong"
+            }
+        },
+        "profile" : {
+            "title" : "Profile Information",
+            "firstname" : "Firstname",
+            "lastname" : "Lastname",
+            "email" : "Email"
+        }
+    },
+    "components" : {
+        "app_header" : {
+            "guide" : "Guide",
+            "profile" : "My Profile"
+        }, 
+        "table_profile" : {
+            "guides" : "My Guides",
+            "liked" : "Liked Guides",
+            "saved" : "Saved Guides"
+        },
+        "drag_drop_images" : {
+            "title": "Click or drag IMAGES to this area to cache locally",
+            "subtitle" : "Support for a single or bulk upload. Only images will be cached locally."
+        },
+        "create_guide" : {
+            "title" : "Please input the title!",
+            "description" : "Please put at least 2 images!",
+            "tags" : "Please input at least one tag!"
+        },
+        "guide_details" : {
+            "author" : "Author",
+            "unknown_author" : "Unknown Author",
+            "images" : "Images",
+            "description" : "Description",
+            "no_description_available" : "No description available."
+        },
+        "model_guides" : {
+            "title" : "Create a new guide"
+        },
+        "table" : {
+            "title_guide" : "Guide",
+            "title_author" : "Author",
+            "likes" : "Likes",
+            "tags" : "Tags"
+        },
+        "tag_inputs" : {
+            "add_tag" : "Add a tag"
+        }
     }
 }

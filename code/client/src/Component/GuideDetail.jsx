@@ -3,12 +3,14 @@ import { Button, Carousel, Modal, Tag, Typography } from "antd";
 import Title from "antd/es/typography/Title";
 import { useState } from "react";
 import MarkdownDisplay from "./MarkdownDisplay";
+import { useTranslation } from 'react-i18next';
 
 const { Text, Paragraph } = Typography;
 
 function GuideDetail(props) {
     const [isLiked, setIsLiked] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
+    const {t} = useTranslation();
 
     const handleLike = () => {
         setIsLiked(!isLiked);
@@ -30,7 +32,7 @@ function GuideDetail(props) {
             style={{ marginTop: '10px' }}
         >
             <div style={{ textAlign: 'center', marginBottom: '10px' }}>
-                <Text strong>Author:</Text> <Text>{props.guide?.author || "Unknown Author"}</Text>
+                <Text strong>{t("components.guide_details.author")}:</Text> <Text>{props.guide?.author || t("components.guide_details.unknown_author")}</Text>
             </div>
 
             <div style={{ textAlign: 'center', marginBottom: '10px' }}>
@@ -43,7 +45,7 @@ function GuideDetail(props) {
 
             {props.guide?.images && props.guide.images.length > 0 && (
                 <div style={{textAlign: 'center', alignItems: 'center'}}>
-                    <Title level={4}>Images</Title>
+                    <Title level={4}>{t("components.guide_details.images")}</Title>
                     <Carousel autoplay infinite>
                         {props.guide.images.map((image, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '300px', }}>
@@ -78,7 +80,7 @@ function GuideDetail(props) {
             </div>
 
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
-                <Title level={4}>Description</Title>
+                <Title level={4}>{t("components.guide_details.description")}</Title>
                 <MarkdownDisplay text={props.guide?.description} title={props.guide?.title}/>
             </div>
         </Modal>

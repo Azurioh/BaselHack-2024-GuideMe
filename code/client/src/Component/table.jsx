@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Table, Space, Tag, Button } from 'antd';
 import { PlusOutlined, HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import GuideDetail from './GuideDetail';
 
 const { Column } = Table;
@@ -9,6 +10,7 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
   const [tableData, setTableData] = useState(data);
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const {t} = useTranslation();
 
   const toggleLike = (key) => {
     const updatedData = tableData.map((item) =>
@@ -39,10 +41,10 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
           onClick: () => handleRowClick(record),
         })}
       >
-        <Column title="Guide" dataIndex="title" key="title" />
-        <Column title="Author" dataIndex="author" key="author" />
+        <Column title={t("components.table.title_guide")} dataIndex="title" key="title" />
+        <Column title={t("components.table.title_author")} dataIndex="author" key="author" />
         <Column
-          title="Likes"
+          title={t("components.table.likes")}
           dataIndex="likes"
           key="likes"
           onFilter={(value, record) => record.likes === value}
@@ -50,7 +52,7 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
           defaultSortOrder={'descend'}
         />
         <Column
-          title="Tags"
+          title={t("components.table.tags")}
           dataIndex="tags"
           key="tags"
           render={(tags) => (

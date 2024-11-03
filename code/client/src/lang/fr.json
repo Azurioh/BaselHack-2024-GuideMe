@@ -1,5 +1,97 @@
 {
-    "home" : {
-        "description": "Concevoir un guide pour ... tout"
+    "pages": {
+        "home": {
+            "description": "Concevoir un guide pour ... tout"
+        },
+        "landing_page": {
+            "title": "Bienvenue sur GuideMe par Endress+Hauser",
+            "description": "Chez Endress+Hauser, nous construisons des dispositifs de mesure avancés pour l'industrie de l'automatisation des processus. Avec d'innombrables dispositifs viennent d'innombrables guides d'assemblage. Pourquoi ne pas générer ces guides automatiquement, à partir d'une séquence d'images ? GuideMe fait exactement cela - économisant du temps et des ressources.",
+            "application": {
+                "title": "Générez des guides à partir de vos images",
+                "description": "Transformez des séquences d'images en guides structurés pour assembler des dispositifs, réaliser des routines de yoga, ou même des recettes de cuisine. Les possibilités sont infinies. Sélectionnez votre format de sortie préféré, et commencez la génération du guide !",
+                "button": "Accéder à l'application"
+            }
+        },
+        "login": {
+            "title": "Connexion",
+            "email": "Email",
+            "input_email": "Veuillez entrer votre email.",
+            "password": "Mot de passe",
+            "input_password": "Veuillez entrer votre mot de passe.",
+            "button": "Connexion",
+            "no_account": "Vous n'avez pas de compte ? Inscrivez-vous ici"
+        },
+        "logout": {
+            "title": "Vous vous déconnectez",
+            "subtitle": "Vous serez redirigé vers la page de connexion..."
+        },
+        "not_found": {
+            "title": "404",
+            "subtitle": "Page non trouvé",
+            "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+            "button": "Retour à l'accueil"
+        },
+        "register": {
+            "title": "Inscription",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "email": "Email",
+            "password": "Mot de passe",
+            "firstname_enter": "Veuillez entrer votre prénom.",
+            "lastname_enter": "Veuillez entrer votre nom.",
+            "email_enter": "Veuillez entrer votre email.",
+            "password_enter": "Veuillez entrer au moins un tag.",
+            "password_stage": {
+                "weak": "Faible",
+                "fair": "Moyen",
+                "good": "Bon",
+                "strong": "Fort"
+            }
+        },
+        "profile": {
+            "title": "Informations du Profil",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "email": "Email"
+        }
+    },
+    "components": {
+        "app_header": {
+            "guide": "Guide",
+            "profile": "Mon Profil"
+        },
+        "table_profile": {
+            "guides": "Mes Guides",
+            "liked": "Guides Aimés",
+            "saved": "Guides Enregistrés"
+        },
+        "drag_drop_images": {
+            "title": "Cliquez ou glissez des IMAGES dans cette zone pour les mettre en cache localement",
+            "subtitle": "Support pour un téléversement unique ou en masse. Seules les images seront mises en cache localement."
+        },
+        "create_guide": {
+            "title": "Veuillez entrer le titre !",
+            "description": "Veuillez mettre au moins 2 images !",
+            "tags": "Veuillez entrer au moins un tag !"
+        },
+        "guide_details": {
+            "author": "Auteur",
+            "unknown_author": "Auteur Inconnu",
+            "images": "Images",
+            "description": "Description",
+            "no_description_available": "Aucune description disponible."
+        },
+        "model_guides": {
+            "title": "Créer un nouveau guide"
+        },
+        "table": {
+            "title_guide": "Guide",
+            "title_author": "Auteur",
+            "likes": "Likes",
+            "tags": "Tags"
+        },
+        "tag_inputs": {
+            "add_tag": "Ajouter un tag"
+        }
     }
 }

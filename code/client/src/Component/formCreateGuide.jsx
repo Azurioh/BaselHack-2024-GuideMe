@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import DragAndDrop from "./dragAndDropImages";
 import TagInput from "./tagInput";
+import { useTranslation } from 'react-i18next';
 
 const FormCreateGuide = (closeModal) => {
   const [form] = Form.useForm();
   const [tags, setTags] = useState([]);
   const [images, setImages] = useState([]);
+  const {t} = useTranslation();
 
   const handleSubmit = (values) => {
     console.log('Form Submitted:', values);
@@ -35,7 +37,7 @@ const FormCreateGuide = (closeModal) => {
         className="pt-4"
         label=""
         name="title"
-        rules={[{ required: true, message: "Please input the title!" }]}
+        rules={[{ required: true, message: t("components.create_guide.title") }]}
       >
         <Input placeholder="Title" />
       </Form.Item>
@@ -47,7 +49,7 @@ const FormCreateGuide = (closeModal) => {
           validator: (_, value) => {
               if (images.length <= 1) {
                 console.log(images);
-                return Promise.reject(new Error("Please put at least 2 images!"));
+                return Promise.reject(new Error(t("components.create_guide.description")));
             }
             return Promise.resolve();
           },
@@ -62,7 +64,7 @@ const FormCreateGuide = (closeModal) => {
           required: true,
           validator: (_, value) => {
               if (tags.length === 0)
-                return Promise.reject(new Error("Please input at least one tag!"));
+                return Promise.reject(new Error(t("components.create_guide.tags")));
               return Promise.resolve();
           },
         }]}

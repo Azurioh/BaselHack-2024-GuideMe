@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Tag } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const TagInput = ({ onTagsChange }) => {
   const [inputValue, setInputValue] = useState('');
   const [tags, setTags] = useState([]);
+  const {t} = useTranslation();
 
   const addTag = (value) => {
     if (value && !tags.includes(value)) {
@@ -27,7 +29,7 @@ const TagInput = ({ onTagsChange }) => {
   return (
     <div>
       <Input
-        placeholder="Add a tag"
+        placeholder={t("components.tag_inputs.add_tag")}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onPressEnter={(e) => {

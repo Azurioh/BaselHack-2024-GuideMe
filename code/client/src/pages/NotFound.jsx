@@ -19,10 +19,10 @@ function NotFound() {
         textAlign: 'center'
       }}
     >
-      <Title style={{ fontSize: '4rem', color: '#1e40af' }}>404</Title>
-      <Title level={2} style={{ color: '#172554' }}>Page Not Found</Title>
+      <Title style={{ fontSize: '4rem', color: '#1e40af' }}>{t("pages.not_found.title")}</Title>
+      <Title level={2} style={{ color: '#172554' }}>{t("pages.not_found.subtitle")}</Title>
       <Text style={{ fontSize: '1.2rem', color: '#666', marginBottom: '2rem' }}>
-        The page you are looking for doesn't exist or has been moved.
+        {t("pages.not_found.description")}
       </Text>
       <Button 
         type="primary"
@@ -36,7 +36,7 @@ function NotFound() {
           width: '200px'
         }}
       >
-        Back to Home
+        {t("pages.not_found.button")}
       </Button>
     </div>
   );

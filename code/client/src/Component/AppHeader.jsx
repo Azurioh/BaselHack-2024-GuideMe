@@ -1,10 +1,12 @@
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, ContainerOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Header } = Layout;
 
 function AppHeader() {
+  const {t} = useTranslation();
   return (
     <Header style={{ backgroundColor: '#001529' }}>
       <Menu
@@ -20,10 +22,10 @@ function AppHeader() {
         </Menu.Item>
 
         <Menu.Item key="application" style={{marginRight: "5px"}}>
-          <Link to="/application"><ContainerOutlined style={{ fontSize: "20px" }} /> Guides</Link>
+          <Link to="/application"><ContainerOutlined style={{ fontSize: "20px" }} />{t("components.app_header.guide")}</Link>
         </Menu.Item>
         <Menu.Item key="profile" style={{marginLeft: "5px"}}>
-          <Link to="/profile"><UserOutlined style={{ fontSize: "20px" }} /> My Profile</Link>
+          <Link to="/profile"><UserOutlined style={{ fontSize: "20px" }} />{t("components.app_header.profile")}</Link>
         </Menu.Item>
 
         <Menu.Item key="logout" style={{ marginLeft: 'auto' }}>

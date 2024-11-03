@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const { Dragger } = Upload;
 
 const DragAndDrop = ({ onImagesChange }) => {
+  const {t} = useTranslation();
   const [images, setImages] = useState([]);
 
   const handleOnChange = (info) => {
@@ -46,9 +48,9 @@ const DragAndDrop = ({ onImagesChange }) => {
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag IMAGES to this area to cache locally</p>
+      <p className="ant-upload-text">{t("components.drag_drop_images.title")}</p>
       <p className="ant-upload-hint">
-        Support for a single or bulk upload. Only images will be cached locally.
+      {t("components.drag_drop_images.subtitle")}
       </p>
     </Dragger>
   );

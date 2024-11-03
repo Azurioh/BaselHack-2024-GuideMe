@@ -1,5 +1,97 @@
 {
-    "home" : {
-        "description": "Einen Leitfaden für ... alles entwerfen."
+    "pages": {
+        "home": {
+            "description": "Erstellen Sie einen Leitfaden für ... alles"
+        },
+        "landing_page": {
+            "title": "Willkommen bei GuideMe von Endress+Hauser",
+            "description": "Bei Endress+Hauser bauen wir fortschrittliche Messgeräte für die Prozessautomatisierungsindustrie. Mit unzähligen Geräten kommen unzählige Montageanleitungen. Warum diese Anleitungen nicht automatisch basierend auf einer Bildersequenz erstellen? GuideMe tut genau das - es spart Zeit und Ressourcen.",
+            "application": {
+                "title": "Leitfäden aus Ihren Bildern erstellen",
+                "description": "Verwandeln Sie Bildsequenzen in strukturierte Anleitungen zum Zusammenbauen von Geräten, Durchführen von Yoga-Routinen oder sogar Kochrezepten. Die Möglichkeiten sind endlos. Wählen Sie Ihr bevorzugtes Ausgabeformat und beginnen Sie mit der Erstellung des Leitfadens!",
+                "button": "Anwendung öffnen"
+            }
+        },
+        "login": {
+            "title": "Anmeldung",
+            "email": "E-Mail",
+            "input_email": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+            "password": "Passwort",
+            "input_password": "Bitte geben Sie Ihr Passwort ein.",
+            "button": "Anmelden",
+            "no_account": "Sie haben kein Konto? Hier registrieren"
+        },
+        "logout": {
+            "title": "Sie melden sich ab",
+            "subtitle": "Sie werden zur Anmeldeseite weitergeleitet..."
+        },
+        "not_found": {
+            "title": "404",
+            "subtitle": "Nicht gefunden",
+            "description": "Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben.",
+            "button": "Zurück zur Startseite"
+        },
+        "register": {
+            "title": "Registrieren",
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "firstname_enter": "Bitte geben Sie Ihren Vornamen ein.",
+            "lastname_enter": "Bitte geben Sie Ihren Nachnamen ein.",
+            "email_enter": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+            "password_enter": "Bitte geben Sie mindestens ein Tag ein.",
+            "password_stage": {
+                "weak": "Schwach",
+                "fair": "Mittel",
+                "good": "Gut",
+                "strong": "Stark"
+            }
+        },
+        "profile": {
+            "title": "Profilinformationen",
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "email": "E-Mail"
+        }
+    },
+    "components": {
+        "app_header": {
+            "guide": "Leitfaden",
+            "profile": "Mein Profil"
+        },
+        "table_profile": {
+            "guides": "Meine Leitfäden",
+            "liked": "Beliebte Leitfäden",
+            "saved": "Gespeicherte Leitfäden"
+        },
+        "drag_drop_images": {
+            "title": "Klicken oder ziehen Sie BILDER in diesen Bereich, um sie lokal zu speichern",
+            "subtitle": "Unterstützt Einzel- oder Massen-Uploads. Nur Bilder werden lokal gespeichert."
+        },
+        "create_guide": {
+            "title": "Bitte geben Sie den Titel ein!",
+            "description": "Bitte fügen Sie mindestens 2 Bilder ein!",
+            "tags": "Bitte geben Sie mindestens ein Schlagwort ein!"
+        },
+        "guide_details": {
+            "author": "Autor",
+            "unknown_author": "Unbekannter Autor",
+            "images": "Bilder",
+            "description": "Beschreibung",
+            "no_description_available": "Keine Beschreibung verfügbar."
+        },
+        "model_guides": {
+            "title": "Einen neuen Leitfaden erstellen"
+        },
+        "table": {
+            "title_guide": "Leitfaden",
+            "title_author": "Autor",
+            "likes": "Likes",
+            "tags": "Schlagwörter"
+        },
+        "tag_inputs": {
+            "add_tag": "Ein Schlagwort hinzufügen"
+        }
     }
 }

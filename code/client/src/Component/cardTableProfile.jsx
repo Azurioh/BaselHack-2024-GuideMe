@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Typography, Table, Card, Radio } from 'antd';
 import MyTable from './table';
+import { useTranslation } from 'react-i18next';
 
 const CardTableProfile = ({ Guides, currentUser }) => {
-  const [currentFilter, setCurrentFilter] = useState('My Guides');
+  const {t} = useTranslation();
+  const [currentFilter, setCurrentFilter] = useState(t("components.table_profile.guides"));
   const [myGuides, setMyGuides] = useState([]);
   const [likedGuides, setLikedGuides] = useState([]);
   const [savedGuides, setSavedGuides] = useState([]);
@@ -26,11 +28,11 @@ const CardTableProfile = ({ Guides, currentUser }) => {
       title={currentFilter}
     >
     <Radio.Group value={currentFilter} onChange={(e) => setCurrentFilter(e.target.value)} style={{marginBottom: "10px"}}>
-      <Radio.Button value='My Guides'>My Guides</Radio.Button>
-      <Radio.Button value='Liked Guides'>Liked Guides</Radio.Button>
-      <Radio.Button value='Saved Guides'>Saved Guides</Radio.Button>
+      <Radio.Button value={t("components.table_profile.guides")}>{t("components.table_profile.guides")}</Radio.Button>
+      <Radio.Button value={t("components.table_profile.liked")}>{t("components.table_profile.liked")}</Radio.Button>
+      <Radio.Button value={t("components.table_profile.saved")}>{t("components.table_profile.saved")}</Radio.Button>
     </Radio.Group>
-    <MyTable data={currentFilter === 'My Guides' ? myGuides : currentFilter === 'Liked Guides' ? likedGuides : savedGuides} className='w-full'/>
+    <MyTable data={currentFilter === t("components.table_profile.guides") ? myGuides : currentFilter === t("components.table_profile.liked") ? likedGuides : savedGuides} className='w-full'/>
     </Card>
   );
 };

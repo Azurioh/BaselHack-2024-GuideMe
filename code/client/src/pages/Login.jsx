@@ -2,6 +2,7 @@ import { Button, Flex, Form, Input } from 'antd';
 import { useAuth } from '../auth/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Title from 'antd/es/typography/Title';
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ import axios from 'axios';
 function Login() {
     const {login} = useAuth();
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,23 +31,23 @@ function Login() {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <Flex className="justify-center pt-5 bg-white w-1/5 rounded-lg" vertical align="center">
-                <Title level={2} className="text-center">Login</Title>
+                <Title level={2} className="text-center">{t("pages.login.title")}</Title>
                 <Form
                     layout='vertical'
                     onFinish={handleLogin}
                     initialValues={{ remember: true }}
                 >
                     <Form.Item
-                        label='Email'
+                        label={t("pages.login.email")}
                         name='email'
-                        rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                        rules={[{ required: true, message: t("pages.login.input_email"), type: 'email' }]}
                     >
                         <Input onChange={(e) => setEmail(e.target.value)} />
                     </Form.Item>
                     <Form.Item
-                        label='Password'
+                        label={t("pages.login.password")}
                         name='password'
-                        rules={[{ required: true, message: 'Please input your password!'}]}
+                        rules={[{ required: true, message: t("pages.login.input_password")}]}
                     >
                         <Input.Password onChange={(e) => setPassword(e.target.value)}/>
                     </Form.Item>
@@ -54,11 +56,11 @@ function Login() {
                             type='primary'
                             htmlType='submit'
                         >
-                            Login
+                            {t("pages.login.button")}
                         </Button>
                     </Form.Item>
                 </Form>
-                <Button onClick={() => navigate('/register')} type='link' className='mb-5'>Don't have an account ? Register here</Button>
+                <Button onClick={() => navigate('/register')} type='link' className='mb-5'>{t("pages.login.no_account")}</Button>
             </Flex>
         </div>
     )

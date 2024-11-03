@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Modal, Input, Button } from 'antd';
 import FormCreateGuide from './formCreateGuide';
+import { useTranslation } from 'react-i18next';
 
 const ModalNewGuide = ({ isOpen, setOpen, onClose }) => {
-  return (
+    const {t} = useTranslation();
+    return (
     <Modal
-      title="Create a new guide"
+      title= {t("components.model_guides.title")}
       open={isOpen}
       onCancel={onClose}
       footer

@@ -2,12 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
 import { Button, Flex, Form, Input, Progress } from "antd";
+import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import Title from "antd/es/typography/Title";
 
 function Register() {
     const {login} = useAuth();
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -70,41 +72,41 @@ function Register() {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <Flex className="justify-center p-5 bg-white w-1/5 rounded-lg" vertical align="center">
-                <Title level={2} className="text-center">Register</Title>
+                <Title level={2} className="text-center">{t("pages.register.title")}</Title>
                 <Form
                     layout='vertical'
                     onFinish={handleRegister}
                     initialValues={{ remember: true }}
                 >
                     <Form.Item
-                        label='Firstname'
+                        label={t("pages.register.firstname")}
                         name='firstname'
-                        rules={[{ required: true, message: 'Please input your firstname!' }]}
+                        rules={[{ required: true, message: t("pages.register.firstname_enter") }]}
                     >
                         <Input onChange={(e) => setFirstName(e.target.value)} />
                     </Form.Item>
                     <Form.Item
-                        label='Lastname'
+                        label={t("pages.register.lastname")}
                         name='lastname'
-                        rules={[{ required: true, message: 'Please input your lastname!' }]}
+                        rules={[{ required: true, message: t("pages.register.lastname_enter") }]}
                     >
                         <Input onChange={(e) => setLastName(e.target.value)} />
                     </Form.Item>
                     <Form.Item
-                        label='Email'
+                        label={t("pages.register.email")}
                         name='email'
-                        rules={[{ required: true, message: 'Please input your email!', type: 'email' }]}
+                        rules={[{ required: true, message: t("pages.register.email_enter"), type: 'email' }]}
                     >
                         <Input onChange={(e) => setEmail(e.target.value)} />
                     </Form.Item>
                     <Form.Item
-                        label='Password'
+                        label={t("pages.register.password")}
                         name='password'
                         rules={[{
                             required: true,
                             validator: (_, value) => {
                                 if (password == "")
-                                    return Promise.reject(new Error("Please input at least one tag!"));
+                                    return Promise.reject(new Error(t("pages.register.password_enter")));
                                 return Promise.resolve();
                             },
                         }]}
@@ -117,11 +119,11 @@ function Register() {
                                 strokeColor={color}
                             />
                             <span style={{ marginLeft: '10px', color }}>
-                                {strength === 0 && 'Weak'}
-                                {strength === 1 && 'Weak'}
-                                {strength === 2 && 'Fair'}
-                                {strength === 3 && 'Good'}
-                                {strength === 4 && 'Strong'}
+                                {strength === 0 && t("pages.register.password_stage.weak")}
+                                {strength === 1 && t("pages.register.password_stage.weak")}
+                                {strength === 2 && t("pages.register.password_stage.fair")}
+                                {strength === 3 && t("pages.register.password_stage.good")}
+                                {strength === 4 && t("pages.register.password_stage.strong")}
                             </span>
                         </div>
                     </Form.Item>

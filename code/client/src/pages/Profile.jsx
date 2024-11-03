@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Table, Typography, Card } from 'antd';
 import CardTableProfile from '../Component/cardTableProfile';
 import LanguageSelector from '../Component/LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
 const Profile = () => {
+  const {t} = useTranslation();
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
@@ -32,17 +34,17 @@ const Profile = () => {
     <div className='w-full h-full flex flex-col items-center justify-center pt-10 space-y-10'>
       <Card
         bordered
-        title='Profile Information'
+        title={t("pages.profile.title")}
         className='w-4/5'
       >
         <Form layout="vertical">
-          <Form.Item label="First Name">
+          <Form.Item label={t("pages.profile.firstname")}>
             <Input value={profile.firstName} readOnly />
           </Form.Item>
-          <Form.Item label="Last Name">
+          <Form.Item label={t("pages.profile.lastname")}>
             <Input value={profile.lastName} readOnly />
           </Form.Item>
-          <Form.Item label="Email">
+          <Form.Item label={t("pages.profile.email")}>
             <Input value={profile.email} readOnly />
           </Form.Item>
           <LanguageSelector/>

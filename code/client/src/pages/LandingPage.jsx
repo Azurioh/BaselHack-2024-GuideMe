@@ -2,10 +2,12 @@
 import React from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import LanguageSelector from '../Component/LanguageSelector';  // Assure-toi d'importer le composant correctement
+import LanguageSelector from '../Component/LanguageSelector.jsx';
+import { useTranslation } from 'react-i18next';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const handleLanguageChange = (value) => {
     console.log("Language selected:", value);
@@ -27,11 +29,9 @@ function LandingPage() {
         color: '#172554',
       }}
     >
-      <h1 style={{ fontSize: '3rem', color: '#1e40af', fontWeight: 'bold' }}>Welcome to GuideMe by Endress+Hauser</h1>
+      <h1 style={{ fontSize: '3rem', color: '#1e40af', fontWeight: 'bold' }}>{t("pages.landing_page.title")}</h1>
       <p style={{ fontSize: '1.3rem', color: '#555', maxWidth: '800px', lineHeight: '1.6', textAlign: 'center' }}>
-        At Endress+Hauser, we build advanced measurement devices for the process automation industry.
-        With countless devices come countless assembly guides. Why not generate these guides
-        automatically, based on a sequence of images? GuideMe does just that – saving time and resources.
+        {t("pages.landing_page.description")}
       </p>
 
       <div
@@ -47,11 +47,10 @@ function LandingPage() {
         }}
       >
         <h2 style={{ color: '#1e40af', fontSize: '2.2rem', marginBottom: '1.5rem' }}>
-          Generate Guides from Your Images
+          {t("pages.landing_page.application.title")}
         </h2>
         <p style={{ color: '#666', marginBottom: '2rem', textAlign: 'center', fontSize: '1.3rem' }}>
-          Turn image sequences into structured guides for assembling devices, performing yoga routines, or even cooking recipes.
-          The possibilities are endless. Select your preferred output format, and let the guide generation begin!
+          {t("pages.landing_page.application.description")}
         </p>
         <Button 
           type="primary"
@@ -66,7 +65,7 @@ function LandingPage() {
             fontSize: '1.2rem',
           }}
         >
-          Access Application
+          {t("pages.landing_page.application.button")}
         </Button>
       </div>
 
