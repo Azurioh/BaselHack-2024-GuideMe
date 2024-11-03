@@ -4,7 +4,7 @@ const jwtService = new JWTService();
 
 export const parseTokenData = (req) => {
   try {
-    const token = req.authorization.split(' ');
+    const token = req.headers.authorization.split(' ');
     const { decoded } = jwtService.verifyToken(token[1]);
     return decoded;
   } catch (err) {

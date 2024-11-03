@@ -2,16 +2,32 @@ import { prisma } from '../global.js';
 
 export class UserRepository {
   async getAllUsers() {
-    return await prisma.user.findMany({});
+    return await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: false,
+        likes: false,
+        saved: false,
+        password: false
+      }
+    });
   }
 
   async getUserById(id, includeGuide) {
     return await prisma.user.findUniqueOrThrow({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
         guidelines: includeGuide,
         likes: includeGuide,
-        saved: includeGuide
+        saved: includeGuide,
+        password: false
       }
     });
   }
@@ -19,21 +35,50 @@ export class UserRepository {
   async getUserByEmail(email, includeGuide) {
     return await prisma.user.findUniqueOrThrow({
       where: { email },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
         guidelines: includeGuide,
         likes: includeGuide,
-        saved: includeGuide
+        saved: includeGuide,
+        password: false
       }
     });
   }
 
-
   async createUser(userData) {
-    return await prisma.user.create({ data: userData });
+    return await prisma.user.create({
+      data: userData,
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: true,
+        likes: true,
+        saved: true,
+        password: false
+      }
+    });
   }
 
   async updateUser(id, userData) {
-    return await prisma.user.update({ where: { id }, data: userData });
+    return await prisma.user.update({
+      where: { id },
+      data: userData,
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        guidelines: true,
+        likes: true,
+        saved: true,
+        password: false
+      }
+    });
   }
 
   async deleteUser(id) {

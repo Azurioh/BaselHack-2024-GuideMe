@@ -34,7 +34,6 @@ async function getYogaGuide(pose) {
       content: content
     };
 
-    console.log(guide);
     return result;
   } catch (error) {
     console.error('Error fetching the yoga guide:', error);
