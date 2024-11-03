@@ -1,3 +1,5 @@
+import { parseTokenData } from '../libs/token';
+
 export class UserController {
   constructor(userService) {
     this.userService = userService;
@@ -22,6 +24,18 @@ export class UserController {
     } catch (err) {
       console.error(err);
       res.status(400).json({ err: 'User not found.' });
+    }
+  };
+
+  getUserMe = async (req, res) => {
+    try {
+      const token = parseTokenData(req);
+      const includeGuide = req.query.includeGuide === 'true';
+      const user = await this.userService.getUserById(token.id, includeGuide);
+      res.status(200).json({ data: { user } });
+    } catch (err) {
+      console.error(err);
+      res.status(403).json({ err: 'Forbidden.' });
     }
   };
 
@@ -52,6 +66,18 @@ export class UserController {
     }
   };
 
+  updateUserMe = async (req, res) => {
+    try {
+      const token = parseTokenData(req);
+      const userData = req.body;
+      const user = await this.userService.updateUser(token.id, userData);
+      res.status(200).json({ data: { user } });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ err: 'Internal server error.' });
+    }
+  };
+
   deleteUser = async (req, res) => {
     try {
       const id = parseInt(req.params.id);
@@ -65,9 +91,9 @@ export class UserController {
 
   likeGuideline = async (req, res) => {
     try {
-      const userId = parseInt(req.params.userId);
+      const token = parseTokenData(req);
       const guidelineId = parseInt(req.params.guidelineId);
-      const user = await this.userService.likeGuideline(userId, guidelineId);
+      const user = await this.userService.likeGuideline(token.id, guidelineId);
       res.status(200).json({ data: { user } });
     } catch (err) {
       console.error(err);
@@ -77,9 +103,9 @@ export class UserController {
 
   unlikeGuideline = async (req, res) => {
     try {
-      const userId = parseInt(req.params.userId);
+      const token = parseTokenData(req);
       const guidelineId = parseInt(req.params.guidelineId);
-      await this.userService.unlikeGuideline(userId, guidelineId);
+      await this.userService.unlikeGuideline(token.id, guidelineId);
       res.status(204).end();
     } catch (err) {
       console.error(err);
@@ -89,9 +115,9 @@ export class UserController {
 
   saveGuideline = async (req, res) => {
     try {
-      const userId = parseInt(req.params.userId);
+      const token = parseTokenData(req);
       const guidelineId = parseInt(req.params.guidelineId);
-      const user = await this.userService.saveGuideline(userId, guidelineId);
+      const user = await this.userService.saveGuideline(token.id, guidelineId);
       res.status(200).json({ data: { user } });
     } catch (err) {
       console.error(err);
@@ -101,9 +127,9 @@ export class UserController {
 
   unsaveGuideline = async (req, res) => {
     try {
-      const userId = parseInt(req.params.userId);
+      const token = parseTokenData(req);
       const guidelineId = parseInt(req.params.guidelineId);
-      await this.userService.unsaveGuideline(userId, guidelineId);
+      await this.userService.unsaveGuideline(token.id, guidelineId);
       res.status(204).end();
     } catch (err) {
       console.error(err);
