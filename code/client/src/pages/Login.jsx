@@ -17,10 +17,11 @@ function Login() {
 
     async function handleLogin() {
         try {
-            await axios.post('/api/auth/login', {
+            const response = await axios.post('/api/auth/login', {
                 email: email,
                 password: password
             });
+            localStorage.setItem('token', response.data.token);
             login();
             navigate('/application');
         } catch (error) {

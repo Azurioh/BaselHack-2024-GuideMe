@@ -16,8 +16,8 @@ function Home() {
   async function fetchGuide() {
     try {
       const response = await axios.get('api/guidelines');
-      console.log(response.data.data.guidelines);
-      setGuide(response.data.data.guidelines);
+      console.log(response.data.guidelines);
+      setGuide(response.data.guidelines);
     } catch (error) {
       console.error(error);
     }

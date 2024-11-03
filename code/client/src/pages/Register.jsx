@@ -21,12 +21,13 @@ function Register() {
 
     async function handleRegister() {
         try {
-            await axios.post('/api/auth/register', {
+            const response = await axios.post('/api/auth/register', {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: password
             });
+            localStorage.setItem('token', response.data.token);
             login();
             navigate('/application');
         } catch (error) {
