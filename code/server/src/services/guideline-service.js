@@ -14,10 +14,11 @@ export class GuidelineService {
     return await this.guidelineRepository.getGuidelineById(id);
   }
 
-  async createGuideline(guidelineData) {
+  async createGuideline(guidelineData, id) {
     try {
       const imageData = guidelineData.imgs
 
+      guidelineData.creatorId = id;
       const response = await fetch('http://python-server:5000/classify-yoga', {
         method: 'POST',
             headers: {
