@@ -23,6 +23,11 @@ const FormCreateGuide = (closeModal, reset) => {
         keywords: tags,
         imgs: images
         // TODO: find a way to Add author
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
       });
       setTags([]);
       closeModal();
