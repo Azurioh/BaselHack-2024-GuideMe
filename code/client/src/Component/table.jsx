@@ -19,6 +19,7 @@ const MyTable = ({ data, addGuideButtonCallBack, rateButtonCallBack, ...props })
     }
     const transformedData = data.map(item => ({
       ...item,
+      title: (item.result?.title != undefined) ? item.result.title : item.title,
       key: item.id,
       author: `${item.creator.firstName} ${item.creator.lastName}`,
       likes: item.likedBy.length,

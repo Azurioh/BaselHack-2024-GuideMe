@@ -18,7 +18,7 @@ const ModalNewGuide = ({ isOpen, setOpen, onClose }) => {
       footer
       centered={true}
     >
-      <FormCreateGuide reset={reset}/>
+      <FormCreateGuide closeModal={onClose} reset={reset}/>
     </Modal>
   );
 }
